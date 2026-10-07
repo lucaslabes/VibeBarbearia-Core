@@ -3,6 +3,7 @@ package vibebarbearia.core.util;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.Locale;
 
 /**
@@ -13,9 +14,18 @@ import java.util.Locale;
 public final class Formatador {
     private Formatador() {}
 
-    public static final DateTimeFormatter DATA = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    public static final DateTimeFormatter HORA = DateTimeFormatter.ofPattern("HH:mm");
-    public static final DateTimeFormatter DATA_HORA = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    /*
+     * ResolverStyle.STRICT + "uuuu": com o padrão SMART do Java, "31/02/2026" era
+     * aceito e virava 28/02/2026 (defeito encontrado pelo teste JUnit
+     * ConversorEntradaTest.dataInexistenteNaoPodeSerAjustadaSilenciosamente).
+     * No modo STRICT o ano precisa ser "uuuu" (ano proléptico) em vez de "yyyy".
+     */
+    public static final DateTimeFormatter DATA =
+            DateTimeFormatter.ofPattern("dd/MM/uuuu").withResolverStyle(ResolverStyle.STRICT);
+    public static final DateTimeFormatter HORA =
+            DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
+    public static final DateTimeFormatter DATA_HORA =
+            DateTimeFormatter.ofPattern("dd/MM/uuuu HH:mm").withResolverStyle(ResolverStyle.STRICT);
     private static final Locale PT_BR = Locale.forLanguageTag("pt-BR");
 
     public static String moeda(double valor) {
