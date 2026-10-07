@@ -11,11 +11,10 @@ import vibebarbearia.core.repository.BarbeiroRepository;
 import vibebarbearia.core.repository.ClienteRepository;
 import vibebarbearia.core.service.regras.Permissao;
 import vibebarbearia.core.service.regras.PoliticaAcesso;
+import vibebarbearia.core.service.regras.RegraConflitoHorario;
 import vibebarbearia.core.util.ConversorEntrada;
 import vibebarbearia.core.util.Periodo;
-import vibebarbearia.core.validation.RegrasNegocio;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -30,13 +29,21 @@ public class AgendamentoService {
     private final ClienteRepository clientes;
     private final BarbeiroRepository barbeiros;
     private final PoliticaAcesso acesso;
+    private final RegraConflitoHorario regraConflito;
 
     public AgendamentoService(AgendamentoRepository agendamentos, ClienteRepository clientes,
                               BarbeiroRepository barbeiros, PoliticaAcesso acesso) {
+        this(agendamentos, clientes, barbeiros, acesso, new RegraConflitoHorario());
+    }
+
+    public AgendamentoService(AgendamentoRepository agendamentos, ClienteRepository clientes,
+                              BarbeiroRepository barbeiros, PoliticaAcesso acesso,
+                              RegraConflitoHorario regraConflito) {
         this.agendamentos = agendamentos;
         this.clientes = clientes;
         this.barbeiros = barbeiros;
         this.acesso = acesso;
+        this.regraConflito = regraConflito;
     }
 
     /** Variante que recebe o texto digitado (dd/MM/aaaa e HH:mm), como na tela. */
@@ -91,14 +98,10 @@ public class AgendamentoService {
         return b;
     }
 
-    /** Regra nova: impede dois atendimentos do mesmo barbeiro em menos de 30 minutos. */
+    /** Impede dois atendimentos do mesmo barbeiro em menos de 30 minutos (regra em RegraConflitoHorario). */
     private void verificarConflito(Barbeiro barbeiro, LocalDateTime dataHora, Integer ignorarId) {
-        long janela = RegrasNegocio.DURACAO_ATENDIMENTO_MINUTOS;
         boolean conflito = listarDoDia(dataHora.toLocalDate()).stream()
-                .filter(a -> ignorarId == null || !ignorarId.equals(a.getIdAgendamento()))
-                .filter(Agendamento::isPendente)
-                .filter(a -> a.pertenceAoBarbeiro(barbeiro.getIdBarbeiro()))
-                .anyMatch(a -> Math.abs(Duration.between(a.getDataHorario(), dataHora).toMinutes()) < janela);
+                .anyMatch(a -> regraConflito.bloqueia(a, barbeiro.getIdBarbeiro(), dataHora, ignorarId));
         if (conflito) {
             throw new RegraNegocioException("O barbeiro " + barbeiro.getNome() + " já tem atendimento próximo a este horário.");
         }

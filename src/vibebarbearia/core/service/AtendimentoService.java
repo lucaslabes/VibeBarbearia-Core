@@ -50,6 +50,14 @@ public class AtendimentoService {
         return itens == null ? 0 : itens.stream().mapToDouble(Servico::getPreco).sum();
     }
 
+    /**
+     * Texto gravado no caixa: "Corte, Produto: Pomada" (antes montado com
+     * StringBuilder dentro de TelaRegistroAtendimento.finalizarAtendimento).
+     */
+    public static String descreverItens(List<Servico> itens) {
+        return itens == null ? "" : itens.stream().map(Servico::getDescricaoCaixa).collect(Collectors.joining(", "));
+    }
+
     public ResultadoAtendimento finalizar(Usuario solicitante, int idAgendamento,
                                          List<Servico> itens, FormaPagamento forma) {
         acesso.exigir(solicitante, Permissao.REGISTRAR_ATENDIMENTO);
@@ -80,7 +88,7 @@ public class AtendimentoService {
         m.setValor(total);
         m.setComissao(comissao.calcular(ag.getBarbeiro(), total));
         m.setFormaPagamento(forma);
-        m.setDescricaoServicos(itens.stream().map(Servico::getDescricaoCaixa).collect(Collectors.joining(", ")));
+        m.setDescricaoServicos(descreverItens(itens));
         m.setIdAgendamento(ag.getIdAgendamento());
         movimentos.registrar(m);
 
