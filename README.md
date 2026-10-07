@@ -6,6 +6,7 @@
 
 - **Etapa 6:** refatoração, SOLID e separação das regras de negócio.
 - **Etapa 7:** testes unitários com JUnit (projeto `VibeBarbearia-Testes/`) e plano de testes.
+- **Etapa 8:** front-end web em HTML, CSS e JavaScript (projeto `VibeBarbearia-Web/`), com wireframes e protótipos em `docs/etapa8/`.
 
 Repositório: <https://github.com/lucaslabes/VibeBarbearia-Core>
 
@@ -22,6 +23,7 @@ uma futura versão **web** (por exemplo, Spring Boot ou Servlets) e pelo própri
 - Apache NetBeans (projeto Ant, mesma estrutura `nbproject/` do desktop)
 - JDBC + MySQL (mesmo banco `sql/vibebarbearia.sql` do projeto desktop)
 - JUnit 4.13.2 (projeto de testes `VibeBarbearia-Testes/`)
+- HTML5, CSS3 e JavaScript puro (front-end `VibeBarbearia-Web/`, projeto HTML5 do NetBeans)
 - Git
 
 ## Arquitetura (camadas)
@@ -46,6 +48,8 @@ src/vibebarbearia/core/
 └── app/               VibeBarbeariaCore (composition root), TesteRegrasNegocio (main com testes)
 
 VibeBarbearia-Testes/  Projeto NetBeans separado com os testes JUnit (referencia este projeto por "..")
+VibeBarbearia-Web/     Projeto NetBeans HTML5/JavaScript com o front-end web (Etapa 8)
+docs/etapa8/           Wireframes, protótipos e documento da Etapa 8
 ```
 
 ## Testes unitários JUnit (Etapa 7)
@@ -57,6 +61,14 @@ Os testes JUnit ficam no projeto NetBeans **`VibeBarbearia-Testes/`**, uma subpa
 - **NetBeans:** *File → Open Project* → `VibeBarbearia-Testes` → **Test Project (Alt+F6)**;
   com um arquivo de teste aberto → **Test File (Ctrl+F6)**.
 - **Linha de comando:** `cd VibeBarbearia-Testes && ant test`
+
+## Front-end web (Etapa 8)
+
+Projeto **`VibeBarbearia-Web/`** (HTML5/JavaScript Application do NetBeans), sem back-end: os dados ficam no
+`localStorage` e as validações espelham as regras deste Core. Abra `VibeBarbearia-Web/public_html/index.html`
+no navegador ou o projeto no NetBeans (*Run Project*). Acesso de demonstração: `admin` / `admin`.
+Detalhes em [`VibeBarbearia-Web/README.md`](VibeBarbearia-Web/README.md); wireframes e protótipos em
+[`docs/etapa8/`](docs/etapa8/README.md).
 
 ## Testes de console (sem banco de dados)
 
@@ -101,4 +113,4 @@ try {
 | Lucas Labes | Desenvolvimento, refatoração e versionamento |
 
 ---
-*Projeto Integrador — Etapa 6 (Refatoração e SOLID) e Etapa 7 (Testes)*
+*Projeto Integrador — Etapa 6 (Refatoração e SOLID), Etapa 7 (Testes) e Etapa 8 (Front-end web)*
