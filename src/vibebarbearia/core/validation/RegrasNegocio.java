@@ -26,6 +26,12 @@ public final class RegrasNegocio {
     /** 1 ponto de fidelidade a cada R$ 10,00 gastos. */
     public static final double VALOR_POR_PONTO_FIDELIDADE = 10.0;
 
+    /** Resgate de fidelidade (regra nova, Etapa 7): cada bloco de 100 pontos vale R$ 10,00. */
+    public static final int PONTOS_POR_RESGATE = 100;
+    public static final double VALOR_POR_RESGATE = 10.0;
+    /** O desconto por pontos não pode passar de 50% do valor do atendimento. */
+    public static final double DESCONTO_MAXIMO_PERCENT = 50.0;
+
     /** Tolerância usada ao comparar valores monetários (meio centavo). */
     public static final double TOLERANCIA_VALOR = 0.005;
 

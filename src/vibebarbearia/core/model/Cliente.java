@@ -43,6 +43,13 @@ public class Cliente {
         this.pontosFidelidade += pontos;
     }
 
+    /** Regra de domínio: debita pontos resgatados (não pode ficar negativo). */
+    public void resgatarPontos(int pontos) {
+        if (pontos < 0) throw new IllegalArgumentException("Pontos não podem ser negativos");
+        if (pontos > pontosFidelidade) throw new IllegalStateException("Pontos insuficientes para o resgate");
+        this.pontosFidelidade -= pontos;
+    }
+
     @Override
     public String toString() { return nome; }
 

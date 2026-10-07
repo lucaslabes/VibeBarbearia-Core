@@ -30,6 +30,11 @@ public record Periodo(LocalDate inicio, LocalDate fim) {
         return new Periodo(d.withDayOfYear(1), d.withDayOfYear(d.lengthOfYear()));
     }
 
+    /** Número de dias do período, contando início e fim (ex.: 01 a 07 = 7 dias). */
+    public long quantidadeDias() {
+        return java.time.temporal.ChronoUnit.DAYS.between(inicio, fim) + 1;
+    }
+
     public boolean contem(LocalDate d) {
         return d != null && !d.isBefore(inicio) && !d.isAfter(fim);
     }

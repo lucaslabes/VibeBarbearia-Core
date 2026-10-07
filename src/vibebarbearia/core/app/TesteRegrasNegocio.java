@@ -243,6 +243,17 @@ public class TesteRegrasNegocio {
             lanca(ValidacaoException.class, () -> c.core.atendimento().finalizar(c.loginThiago,
                     a.getIdAgendamento(), List.of(), FormaPagamento.PIX));
         });
+        r.teste("Regra nova: resgate de 200 pontos = R$20 de desconto; comissão e pontos sobre o valor pago", () -> {
+            Cenario c = new Cenario();
+            c.joao.adicionarPontos(250);
+            Agendamento a = c.agendar(c.joao, c.thiago, 11, 0);
+            ResultadoAtendimento res = c.core.atendimento().finalizar(c.loginThiago, a.getIdAgendamento(),
+                    List.of(c.corte, c.pomada), FormaPagamento.PIX, true);
+            igual(20.0, res.desconto());
+            igual(65.0, res.valorPago());
+            igual(26.0, res.movimento().getComissao());
+            igual(50 + 6, c.joao.getPontosFidelidade());
+        });
         r.teste("Barbeiro não finaliza atendimento de outro barbeiro", () -> {
             Cenario c = new Cenario();
             Agendamento a = c.agendar(c.joao, c.rafael, 11, 0);

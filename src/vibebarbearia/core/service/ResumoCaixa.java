@@ -24,4 +24,10 @@ public record ResumoCaixa(List<MovimentoCaixa> movimentos, double total, double 
     public double totalDa(FormaPagamento f) { return totalPorForma.getOrDefault(f, 0.0); }
 
     public int quantidade() { return movimentos.size(); }
+
+    /** Valor que fica com a barbearia: total recebido menos as comissões dos barbeiros. */
+    public double saldoBarbearia() { return total - totalComissao; }
+
+    /** Valor médio por atendimento (0 quando não há movimentos). */
+    public double ticketMedio() { return movimentos.isEmpty() ? 0 : total / movimentos.size(); }
 }
