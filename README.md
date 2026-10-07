@@ -2,7 +2,12 @@
 
 ## Status do projeto
 
-**Em desenvolvimento** — Projeto Integrador SENAC, **Etapa 6** (refatoração, SOLID e separação das regras de negócio).
+**Em desenvolvimento** — Projeto Integrador SENAC.
+
+- **Etapa 6:** refatoração, SOLID e separação das regras de negócio.
+- **Etapa 7:** testes unitários com JUnit (projeto `VibeBarbearia-Testes/`) e plano de testes.
+
+Repositório: <https://github.com/lucaslabes/VibeBarbearia-Core>
 
 ## Objetivo
 
@@ -16,6 +21,7 @@ uma futura versão **web** (por exemplo, Spring Boot ou Servlets) e pelo própri
 - Java 17+ (testado com OpenJDK 21)
 - Apache NetBeans (projeto Ant, mesma estrutura `nbproject/` do desktop)
 - JDBC + MySQL (mesmo banco `sql/vibebarbearia.sql` do projeto desktop)
+- JUnit 4.13.2 (projeto de testes `VibeBarbearia-Testes/`)
 - Git
 
 ## Arquitetura (camadas)
@@ -34,12 +40,25 @@ src/vibebarbearia/core/
 │   │                  AtendimentoService, CaixaService, AutenticacaoService,
 │   │                  CatalogoService, DashboardService
 │   ├── regras/        PoliticaAcesso, PoliticaComissao, PoliticaFidelidade,
+│   │                  RegraConflitoHorario, DescontoFidelidade,
 │   │                  CodificadorSenha, GeradorSenha, NotificadorSenha (Strategies)
 │   └── relatorio/     RelatorioService + 6 estratégias de relatório
 └── app/               VibeBarbeariaCore (composition root), TesteRegrasNegocio (main com testes)
+
+VibeBarbearia-Testes/  Projeto NetBeans separado com os testes JUnit (referencia este projeto por "..")
 ```
 
-## Como executar os testes (sem banco de dados)
+## Testes unitários JUnit (Etapa 7)
+
+Os testes JUnit ficam no projeto NetBeans **`VibeBarbearia-Testes/`**, uma subpasta deste repositório
+(44 testes, sem banco de dados, só com repositórios em memória). Detalhes em
+[`VibeBarbearia-Testes/README.md`](VibeBarbearia-Testes/README.md).
+
+- **NetBeans:** *File → Open Project* → `VibeBarbearia-Testes` → **Test Project (Alt+F6)**;
+  com um arquivo de teste aberto → **Test File (Ctrl+F6)**.
+- **Linha de comando:** `cd VibeBarbearia-Testes && ant test`
+
+## Testes de console (sem banco de dados)
 
 **NetBeans:** abrir a pasta `VibeBarbearia-Core` → *Run Project* (F6).
 A classe principal é `vibebarbearia.core.app.TesteRegrasNegocio`.
@@ -54,7 +73,7 @@ javac -d build/classes $(find src -name "*.java")
 java -cp build/classes vibebarbearia.core.app.TesteRegrasNegocio
 ```
 
-Saída esperada: `Total: 49 | PASS: 49 | FAIL: 0`.
+Saída esperada: `Total: 50 | PASS: 50 | FAIL: 0`.
 
 ## Usando com MySQL
 
@@ -82,4 +101,4 @@ try {
 | Lucas Labes | Desenvolvimento, refatoração e versionamento |
 
 ---
-*Projeto Integrador — Etapa 6 (Refatoração e SOLID)*
+*Projeto Integrador — Etapa 6 (Refatoração e SOLID) e Etapa 7 (Testes)*
