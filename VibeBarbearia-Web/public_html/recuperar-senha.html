@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Recuperação de senha da equipe da Vibe Barbearia.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Esqueci minha senha · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="tela-acesso">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="acesso-grade">
+        <section class="acesso-marca" aria-label="Vibe Barbearia">
+            <div class="acesso-marca-conteudo">
+                <img src="img/logo.svg" alt="" width="96" height="96">
+                <p class="logo-grande">VIBE</p>
+                <p class="logo-sub">BARBEARIA</p>
+                <p class="acesso-slogan">Gestão completa para<br>sua barbearia.</p>
+            </div>
+            <a class="voltar-site" href="index.html">← Voltar para o site</a>
+        </section>
+        <main id="conteudo" class="acesso-formulario">
+            <div class="acesso-topo"><button type="button" class="btn-icone" data-alternar-tema></button></div>
+            <div class="acesso-caixa">
+                <h1>Esqueci minha senha</h1>
+                <p class="texto-secundario">Uma senha provisória será enviada ao e-mail cadastrado.</p>
+                <form id="form-recuperar" class="formulario" novalidate>
+                    <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                    <div class="campo">
+                        <label for="rec-login">Login <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="rec-login" name="login" type="text" required aria-required="true" aria-describedby="erro-login ajuda-login" autocomplete="username" autocapitalize="none">
+                        <span class="ajuda" id="ajuda-login">Dono: login. Gerente e barbeiro: CPF.</span>
+                        <p class="erro-campo" id="erro-login" aria-live="polite"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primario btn-bloco">Enviar senha</button>
+                    <a class="link-centro" href="login.html">Voltar para o login</a>
+                </form>
+                <div id="rec-resultado" aria-live="polite"></div>
+            </div>
+            <p class="acesso-rodape">Vibe Barbearia © 2026 · Sistema de Gestão Premium</p>
+        </main>
+    </div>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/recuperar-senha.js" defer></script>
+</body>
+</html>

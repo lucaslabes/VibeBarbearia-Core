@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Simule seus pontos de fidelidade da Vibe Barbearia e veja quanto de desconto você ganha.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Programa de fidelidade · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="site-publico">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-cabecalho">
+        <div class="conteudo">
+            <a class="marca" href="index.html" aria-label="Vibe Barbearia — página inicial">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav class="site-nav" id="site-nav" aria-label="Navegação do site">
+                <a href="index.html#servicos">Serviços</a>
+                <a href="index.html#equipe">Barbeiros</a>
+                <a href="fidelidade.html" aria-current="page">Fidelidade</a>
+                <a href="login.html">Área da equipe</a>
+                <a class="btn btn-primario" href="agendar.html">Agendar online</a>
+            </nav>
+            <div class="site-acoes">
+                <button type="button" class="btn-icone" data-alternar-tema></button>
+                <button type="button" class="btn-icone btn-menu-site" id="btn-menu-site" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menu"></button>
+            </div>
+        </div>
+    </header>
+
+    <main id="conteudo" class="conteudo secao-curta">
+        <div class="cabecalho-pagina">
+            <h1>Programa de fidelidade</h1>
+            <p class="texto-secundario">A cada <strong>R$ 10</strong> pagos você ganha <strong>1 ponto</strong>. Cada <strong>100 pontos</strong> valem <strong>R$ 10 de desconto</strong>, limitado a 50% do atendimento.</p>
+        </div>
+        <div class="fidelidade-grade">
+            <section class="card" aria-labelledby="sim-titulo">
+                <h2 id="sim-titulo">Simulador de pontos</h2>
+                <form id="form-simulador" class="formulario" novalidate>
+                    <div class="grade-2">
+                    <div class="campo">
+                        <label for="sim-pontos">Seus pontos atuais</label>
+                        <input id="sim-pontos" name="pontosAtuais" type="number" aria-describedby="erro-pontosAtuais" min="0" step="1" value="250" inputmode="numeric">
+                        <p class="erro-campo" id="erro-pontosAtuais" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="sim-valor">Valor do atendimento (R$)</label>
+                        <input id="sim-valor" name="valorAtendimento" type="text" aria-describedby="erro-valorAtendimento ajuda-valorAtendimento" inputmode="decimal" value="85,00">
+                        <span class="ajuda" id="ajuda-valorAtendimento">Ou marque os serviços abaixo.</span>
+                        <p class="erro-campo" id="erro-valorAtendimento" aria-live="polite"></p>
+                    </div>
+                    </div>
+                    <fieldset>
+                        <legend>Montar atendimento</legend>
+                        <div class="chips chips-compactos" id="sim-servicos"></div>
+                    </fieldset>
+                    <label class="check"><input type="checkbox" id="sim-resgatar" checked> Usar meus pontos como desconto</label>
+                </form>
+            </section>
+            <section class="card resultado-simulador" aria-labelledby="res-sim-titulo" aria-live="polite">
+                <h2 id="res-sim-titulo">Resultado</h2>
+                <div class="recibo">
+                    <dl>
+                        <dt>Valor do atendimento</dt><dd id="r-bruto">—</dd>
+                        <dt>Desconto com pontos</dt><dd id="r-desconto">—</dd>
+                        <dt>Pontos usados</dt><dd id="r-usados">—</dd>
+                        <hr>
+                        <dt>Você paga</dt><dd class="total" id="r-pago">—</dd>
+                        <dt>Pontos ganhos nesta visita</dt><dd id="r-ganhos">—</dd>
+                        <dt>Saldo após a visita</dt><dd id="r-saldo">—</dd>
+                    </dl>
+                </div>
+                <div class="meta-pontos">
+                    <div class="linha-entre"><span class="rotulo">Rumo ao próximo desconto</span><span id="r-meta-texto" class="texto-secundario"></span></div>
+                    <div class="progresso" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="r-barra" aria-label="Progresso até o próximo bloco de 100 pontos"><span style="width:0%"></span></div>
+                </div>
+                <p class="dica" id="r-dica"></p>
+            </section>
+        </div>
+
+        <section class="card consulta-pontos" aria-labelledby="consulta-titulo">
+            <h2 id="consulta-titulo">Consultar meus pontos</h2>
+            <form id="form-consulta" class="linha consulta-form" novalidate>
+                <div class="campo">
+                        <label for="consulta-telefone">Celular cadastrado</label>
+                        <input id="consulta-telefone" name="telefoneConsulta" type="tel" aria-describedby="erro-telefoneConsulta" inputmode="numeric" data-mascara="telefone" placeholder="(51) 99999-8888" autocomplete="tel">
+                        <p class="erro-campo" id="erro-telefoneConsulta" aria-live="polite"></p>
+                    </div>
+                <button type="submit" class="btn btn-primario">Consultar</button>
+            </form>
+            <div id="consulta-resultado" aria-live="polite"></div>
+        </section>
+    </main>
+    <footer class="site-rodape">
+        <div class="conteudo">
+            <p>Vibe Barbearia © <span id="ano">2026</span> · Sistema de Gestão Premium</p>
+            <p>Segunda a sábado, das 9h às 19h · <a href="login.html">Área da equipe</a></p>
+        </div>
+    </footer>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/fidelidade.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Acesso da equipe ao sistema de gestão da Vibe Barbearia.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Acessar sistema · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="tela-acesso">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="acesso-grade">
+        <section class="acesso-marca" aria-label="Vibe Barbearia">
+            <div class="acesso-marca-conteudo">
+                <img src="img/logo.svg" alt="" width="96" height="96">
+                <p class="logo-grande">VIBE</p>
+                <p class="logo-sub">BARBEARIA</p>
+                <p class="acesso-slogan">Gestão completa para<br>sua barbearia.</p>
+            </div>
+            <a class="voltar-site" href="index.html">← Voltar para o site</a>
+        </section>
+        <main id="conteudo" class="acesso-formulario">
+            <div class="acesso-topo"><button type="button" class="btn-icone" data-alternar-tema></button></div>
+            <div class="acesso-caixa">
+                <h1>Acessar sistema</h1>
+                <p class="texto-secundario">Informe usuário e senha para continuar</p>
+                <form id="form-login" class="formulario" novalidate>
+                    <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                    <div class="campo">
+                        <label for="login-usuario">Usuário <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="login-usuario" name="login" type="text" required aria-required="true" aria-describedby="erro-login ajuda-login" autocomplete="username" autocapitalize="none" spellcheck="false">
+                        <span class="ajuda" id="ajuda-login">Dono: login livre. Gerente e barbeiro: CPF.</span>
+                        <p class="erro-campo" id="erro-login" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="login-senha">Senha <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <div class="campo-senha">
+                            <input id="login-senha" name="senha" type="password" required aria-required="true" autocomplete="current-password" aria-describedby="erro-senha">
+                            <button type="button" class="mostrar-senha" data-alvo="login-senha" aria-label="Mostrar senha" aria-pressed="false"></button>
+                        </div>
+                        <p class="erro-campo" id="erro-senha" aria-live="polite"></p>
+                    </div>
+                    <button type="submit" class="btn btn-primario btn-bloco">ENTRAR</button>
+                    <a class="link-centro" href="recuperar-senha.html">Esqueci minha senha</a>
+                </form>
+                <section class="demo" aria-labelledby="demo-titulo">
+                    <h2 id="demo-titulo">Acessos de demonstração</h2>
+                    <p class="texto-secundario">Clique para preencher. Os dados ficam só neste navegador.</p>
+                    <ul class="demo-lista">
+                        <li><button type="button" class="demo-item" data-login="admin" data-senha="admin"><strong>Dono</strong><span>admin / admin</span></button></li>
+                        <li><button type="button" class="demo-item" data-login="555.555.555-55" data-senha="123"><strong>Gerente</strong><span>555.555.555-55 / 123</span></button></li>
+                        <li><button type="button" class="demo-item" data-login="111.111.111-11" data-senha="123"><strong>Barbeiro</strong><span>111.111.111-11 / 123</span></button></li>
+                    </ul>
+                    <button type="button" class="btn btn-texto" id="btn-resetar">Restaurar dados de demonstração</button>
+                </section>
+            </div>
+            <p class="acesso-rodape">Vibe Barbearia © 2026 · Sistema de Gestão Premium</p>
+        </main>
+    </div>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/login.js" defer></script>
+</body>
+</html>

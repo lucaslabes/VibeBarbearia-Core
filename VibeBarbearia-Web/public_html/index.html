@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Vibe Barbearia: cortes, barba e cuidados masculinos. Agende online em poucos cliques.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Início · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="site-publico">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-cabecalho">
+        <div class="conteudo">
+            <a class="marca" href="index.html" aria-label="Vibe Barbearia — página inicial">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav class="site-nav" id="site-nav" aria-label="Navegação do site">
+                <a href="index.html#servicos">Serviços</a>
+                <a href="index.html#equipe">Barbeiros</a>
+                <a href="fidelidade.html">Fidelidade</a>
+                <a href="login.html">Área da equipe</a>
+                <a class="btn btn-primario" href="agendar.html">Agendar online</a>
+            </nav>
+            <div class="site-acoes">
+                <button type="button" class="btn-icone" data-alternar-tema></button>
+                <button type="button" class="btn-icone btn-menu-site" id="btn-menu-site" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menu"></button>
+            </div>
+        </div>
+    </header>
+
+    <main id="conteudo">
+        <section class="hero" aria-labelledby="hero-titulo">
+            <div class="conteudo hero-grade">
+                <div class="hero-texto">
+                    <p class="sobretitulo">Barbearia premium</p>
+                    <h1 id="hero-titulo">Seu estilo, <span class="texto-dourado">no seu horário.</span></h1>
+                    <p class="hero-lead">Escolha o serviço, o barbeiro e um horário livre em menos de um minuto. Cada visita ainda gera pontos que viram desconto.</p>
+                    <div class="linha">
+                        <a class="btn btn-primario" href="agendar.html">Agendar agora</a>
+                        <a class="btn btn-secundario" href="fidelidade.html">Simular meus pontos</a>
+                    </div>
+                </div>
+                <aside class="card hero-card" aria-labelledby="agora-titulo">
+                    <h2 id="agora-titulo" class="h3">Agora na Vibe</h2>
+                    <p class="status-loja" id="status-loja">Verificando horário…</p>
+                    <dl class="hero-dados">
+                        <div><dt>Próximo horário livre</dt><dd id="proximo-livre">—</dd></div>
+                        <div><dt>Barbeiros atendendo</dt><dd id="qtd-barbeiros">—</dd></div>
+                        <div><dt>Horário</dt><dd>Seg. a sáb., 9h–19h</dd></div>
+                    </dl>
+                    <a class="btn btn-primario btn-bloco" id="link-proximo" href="agendar.html">Reservar este horário</a>
+                </aside>
+            </div>
+        </section>
+
+        <section class="secao" id="servicos" aria-labelledby="servicos-titulo">
+            <div class="conteudo">
+                <div class="secao-titulo">
+                    <p class="sobretitulo">Catálogo</p>
+                    <h2 id="servicos-titulo">Serviços e preços</h2>
+                    <p class="texto-secundario">Os mesmos preços praticados no balcão. Cada atendimento dura cerca de 30 minutos.</p>
+                </div>
+                <div class="grade-servicos" id="lista-servicos"><!-- preenchido por inicio.js --></div>
+                <details class="produtos">
+                    <summary>Ver produtos à venda</summary>
+                    <ul class="lista-produtos" id="lista-produtos"></ul>
+                </details>
+            </div>
+        </section>
+
+        <section class="secao secao-alternada" id="equipe" aria-labelledby="equipe-titulo">
+            <div class="conteudo">
+                <div class="secao-titulo">
+                    <p class="sobretitulo">Equipe</p>
+                    <h2 id="equipe-titulo">Nossos barbeiros</h2>
+                </div>
+                <div class="grade-equipe" id="lista-equipe"></div>
+            </div>
+        </section>
+
+        <section class="secao" aria-labelledby="como-titulo">
+            <div class="conteudo">
+                <div class="secao-titulo">
+                    <p class="sobretitulo">Simples assim</p>
+                    <h2 id="como-titulo">Como funciona</h2>
+                </div>
+                <ol class="grade-3 passos-home">
+                    <li class="card"><span class="numero" aria-hidden="true">1</span><h3>Escolha</h3><p class="texto-secundario">Serviço e barbeiro — ou deixe o sistema escolher quem estiver livre.</p></li>
+                    <li class="card"><span class="numero" aria-hidden="true">2</span><h3>Reserve</h3><p class="texto-secundario">Só aparecem horários realmente livres: a agenda respeita o intervalo de 30 minutos de cada barbeiro.</p></li>
+                    <li class="card"><span class="numero" aria-hidden="true">3</span><h3>Ganhe pontos</h3><p class="texto-secundario">A cada R$ 10 você ganha 1 ponto. Com 100 pontos, R$ 10 de desconto.</p></li>
+                </ol>
+            </div>
+        </section>
+    </main>
+    <footer class="site-rodape">
+        <div class="conteudo">
+            <p>Vibe Barbearia © <span id="ano">2026</span> · Sistema de Gestão Premium</p>
+            <p>Segunda a sábado, das 9h às 19h · <a href="login.html">Área da equipe</a></p>
+        </div>
+    </footer>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/inicio.js" defer></script>
+</body>
+</html>

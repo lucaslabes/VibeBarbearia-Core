@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Agende seu horário na Vibe Barbearia: escolha serviço, barbeiro e um horário livre.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Agendar online · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="site-publico">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <header class="site-cabecalho">
+        <div class="conteudo">
+            <a class="marca" href="index.html" aria-label="Vibe Barbearia — página inicial">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav class="site-nav" id="site-nav" aria-label="Navegação do site">
+                <a href="index.html#servicos">Serviços</a>
+                <a href="index.html#equipe">Barbeiros</a>
+                <a href="fidelidade.html">Fidelidade</a>
+                <a href="login.html">Área da equipe</a>
+                <a class="btn btn-primario" href="agendar.html" aria-current="page">Agendar online</a>
+            </nav>
+            <div class="site-acoes">
+                <button type="button" class="btn-icone" data-alternar-tema></button>
+                <button type="button" class="btn-icone btn-menu-site" id="btn-menu-site" aria-controls="site-nav" aria-expanded="false" aria-label="Abrir menu"></button>
+            </div>
+        </div>
+    </header>
+
+    <main id="conteudo" class="conteudo secao-curta">
+        <div class="cabecalho-pagina">
+            <h1>Agendar online</h1>
+            <p class="texto-secundario">Quatro passos rápidos. Os horários exibidos já estão livres na agenda do barbeiro.</p>
+        </div>
+        <ol class="passos" id="passos" aria-label="Etapas do agendamento">
+            <li class="atual" aria-current="step"><span>Serviços</span></li>
+            <li><span>Barbeiro</span></li>
+            <li><span>Data e horário</span></li>
+            <li><span>Seus dados</span></li>
+        </ol>
+        <div class="agendar-grade">
+            <form id="form-agendar" class="card" novalidate>
+                <p class="erro-formulario" tabindex="-1" role="alert"></p>
+
+                <fieldset class="etapa" data-etapa="1">
+                    <legend>1. Quais serviços?</legend>
+                    <p class="texto-secundario">Selecione um ou mais serviços.</p>
+                    <div class="chips" id="op-servicos" role="group" aria-describedby="erro-servicos"></div>
+                    <p class="erro-campo" id="erro-servicos" aria-live="polite"></p>
+                </fieldset>
+
+                <fieldset class="etapa" data-etapa="2" hidden>
+                    <legend>2. Com quem?</legend>
+                    <div class="chips" id="op-barbeiros" role="radiogroup" aria-describedby="erro-barbeiro"></div>
+                    <p class="erro-campo" id="erro-barbeiro" aria-live="polite"></p>
+                </fieldset>
+
+                <fieldset class="etapa" data-etapa="3" hidden>
+                    <legend>3. Quando?</legend>
+                    <p class="rotulo" id="rotulo-dias">Dia</p>
+                    <div class="dias" id="op-dias" role="group" aria-labelledby="rotulo-dias"></div>
+                    <div class="linha-entre">
+                        <p class="rotulo" id="rotulo-horas">Horários disponíveis</p>
+                        <div class="legenda" aria-hidden="true"><span class="l-livre">Livre</span><span class="l-sel">Selecionado</span><span class="l-ocupado">Ocupado</span></div>
+                    </div>
+                    <div class="horarios" id="op-horas" role="group" aria-labelledby="rotulo-horas" aria-describedby="erro-hora"></div>
+                    <p class="erro-campo" id="erro-hora" aria-live="polite"></p>
+                </fieldset>
+
+                <fieldset class="etapa" data-etapa="4" hidden>
+                    <legend>4. Seus dados</legend>
+                    <div class="grade-2">
+                    <div class="campo">
+                        <label for="ag-nome">Nome <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="ag-nome" name="nome" type="text" required aria-required="true" aria-describedby="erro-nome" autocomplete="name" maxlength="80">
+                        <p class="erro-campo" id="erro-nome" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="ag-telefone">Celular (WhatsApp) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="ag-telefone" name="telefone" type="tel" required aria-required="true" aria-describedby="erro-telefone ajuda-telefone" autocomplete="tel" inputmode="numeric" data-mascara="telefone" placeholder="(51) 99999-9999">
+                        <span class="ajuda" id="ajuda-telefone">DDD + número. Se você já é cliente, usamos o mesmo cadastro.</span>
+                        <p class="erro-campo" id="erro-telefone" aria-live="polite"></p>
+                    </div>
+                    </div>
+                    <div class="campo">
+                        <label for="ag-email">E-mail (opcional)</label>
+                        <input id="ag-email" name="email" type="email" aria-describedby="erro-email" autocomplete="email">
+                        <p class="erro-campo" id="erro-email" aria-live="polite"></p>
+                    </div>
+                </fieldset>
+
+                <div class="acoes-formulario">
+                    <button type="button" class="btn btn-secundario" id="btn-voltar" hidden>Voltar</button>
+                    <button type="button" class="btn btn-primario" id="btn-avancar">Continuar</button>
+                    <button type="submit" class="btn btn-primario" id="btn-confirmar" hidden>Confirmar agendamento</button>
+                </div>
+            </form>
+
+            <aside class="card resumo-agendamento" aria-labelledby="resumo-titulo" aria-live="polite">
+                <h2 id="resumo-titulo" class="h3">Resumo</h2>
+                <dl class="resumo-lista">
+                    <dt>Serviços</dt><dd id="res-servicos">—</dd>
+                    <dt>Barbeiro</dt><dd id="res-barbeiro">—</dd>
+                    <dt>Data e hora</dt><dd id="res-quando">—</dd>
+                </dl>
+                <p class="total-resumo">Total estimado <strong id="res-total">R$ 0,00</strong></p>
+                <p class="pontos-resumo"><span aria-hidden="true">★</span> Você ganhará <strong id="res-pontos">0 pontos</strong> de fidelidade</p>
+            </aside>
+        </div>
+
+        <section class="card confirmacao" id="confirmacao" hidden tabindex="-1" aria-labelledby="conf-titulo">
+            <div class="selo" aria-hidden="true">✓</div>
+            <h2 id="conf-titulo">Agendamento confirmado!</h2>
+            <p id="conf-texto"></p>
+            <div class="linha centro-flex">
+                <a class="btn btn-primario" id="btn-ics" download="agendamento-vibe.ics" href="#">Adicionar ao calendário</a>
+                <a class="btn btn-secundario" id="btn-whats" target="_blank" rel="noopener" href="#">Compartilhar no WhatsApp</a>
+                <a class="btn btn-texto" href="agendar.html">Fazer outro agendamento</a>
+            </div>
+        </section>
+    </main>
+    <footer class="site-rodape">
+        <div class="conteudo">
+            <p>Vibe Barbearia © <span id="ano">2026</span> · Sistema de Gestão Premium</p>
+            <p>Segunda a sábado, das 9h às 19h · <a href="login.html">Área da equipe</a></p>
+        </div>
+    </footer>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/agendar.js" defer></script>
+</body>
+</html>
