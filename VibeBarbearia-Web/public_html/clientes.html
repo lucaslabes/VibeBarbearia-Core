@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cadastro de clientes da barbearia.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Gerenciamento de Clientes · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="clientes.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Gerenciamento de Clientes</h1>
+                    <p class="subtitulo">Cadastro, pesquisa e histórico</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <section class="card barra-ferramentas" aria-label="Pesquisa de clientes">
+                    <div class="campo campo-busca">
+                        <label for="busca">Buscar por nome ou telefone</label>
+                        <input id="busca" type="search" placeholder="Ex.: Silva ou 99988" autocomplete="off">
+                    </div>
+                    <button type="button" class="btn btn-primario" id="btn-novo">Novo Cliente</button>
+                </section>
+                <p class="texto-secundario" id="contagem" aria-live="polite"></p>
+                <div class="tabela-container">
+                    <table class="tabela tabela-responsiva">
+                        <caption class="visualmente-oculto">Clientes cadastrados</caption>
+                        <thead><tr><th scope="col">Nome</th><th scope="col">Telefone</th><th scope="col">E-mail</th><th scope="col" class="num">Pontos Fidelidade</th><th scope="col">Último Corte</th><th scope="col" class="direita">Ações</th></tr></thead>
+                        <tbody id="tabela-clientes"></tbody>
+                    </table>
+                </div>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <dialog class="modal" id="modal-cliente" aria-labelledby="modal-cli-titulo">
+        <form id="form-cliente" novalidate>
+            <div class="modal-cabecalho"><h2 id="modal-cli-titulo">Cadastrar Novo Cliente</h2><button type="button" class="btn-icone" data-fechar aria-label="Fechar">✕</button></div>
+            <div class="modal-corpo formulario">
+                <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                <input type="hidden" name="id">
+                <div class="campo">
+                        <label for="cli-nome">Nome <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="cli-nome" name="nome" type="text" required aria-required="true" aria-describedby="erro-nome" maxlength="80" autocomplete="off">
+                        <p class="erro-campo" id="erro-nome" aria-live="polite"></p>
+                    </div>
+                <div class="grade-2">
+                <div class="campo">
+                        <label for="cli-telefone">Telefone <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="cli-telefone" name="telefone" type="tel" required aria-required="true" aria-describedby="erro-telefone ajuda-telefone" inputmode="numeric" data-mascara="telefone">
+                        <span class="ajuda" id="ajuda-telefone">10 ou 11 dígitos, com DDD.</span>
+                        <p class="erro-campo" id="erro-telefone" aria-live="polite"></p>
+                    </div>
+                <div class="campo">
+                        <label for="cli-cpf">CPF (opcional)</label>
+                        <input id="cli-cpf" name="cpf" type="text" aria-describedby="erro-cpf ajuda-cpf" inputmode="numeric" data-mascara="cpf" maxlength="14">
+                        <span class="ajuda" id="ajuda-cpf">Conferimos os dígitos verificadores.</span>
+                        <p class="erro-campo" id="erro-cpf" aria-live="polite"></p>
+                    </div>
+                </div>
+                <div class="campo">
+                        <label for="cli-email">E-mail</label>
+                        <input id="cli-email" name="email" type="email" aria-describedby="erro-email" autocomplete="off">
+                        <p class="erro-campo" id="erro-email" aria-live="polite"></p>
+                    </div>
+            </div>
+            <div class="modal-rodape"><button type="button" class="btn btn-secundario" data-fechar>Cancelar</button><button type="submit" class="btn btn-primario">Salvar</button></div>
+        </form>
+    </dialog>
+    <dialog class="modal" id="modal-historico" aria-labelledby="modal-hist-titulo">
+        <div class="modal-cabecalho"><h2 id="modal-hist-titulo">Histórico</h2><button type="button" class="btn-icone" data-fechar aria-label="Fechar">✕</button></div>
+        <div class="modal-corpo" id="historico-corpo"></div>
+    </dialog>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/clientes.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Catálogo de serviços e produtos.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Serviços e produtos · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="servicos.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Serviços e produtos</h1>
+                    <p class="subtitulo">Catálogo usado no atendimento e no site</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <section class="card barra-ferramentas" aria-label="Filtros do catálogo">
+                    <div class="abas" role="tablist" aria-label="Tipo de item">
+                        <button type="button" class="aba" role="tab" aria-selected="true" data-tipo="">Todos</button>
+                        <button type="button" class="aba" role="tab" aria-selected="false" data-tipo="SERVICO">Serviços</button>
+                        <button type="button" class="aba" role="tab" aria-selected="false" data-tipo="PRODUTO">Produtos</button>
+                    </div>
+                    <button type="button" class="btn btn-primario" id="btn-novo">Novo serviço / produto</button>
+                </section>
+                <div class="grade-catalogo" id="grade-catalogo" role="tabpanel" aria-live="polite"></div>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <dialog class="modal" id="modal-item" aria-labelledby="modal-item-titulo">
+        <form id="form-item" novalidate>
+            <div class="modal-cabecalho"><h2 id="modal-item-titulo">Novo serviço / produto</h2><button type="button" class="btn-icone" data-fechar aria-label="Fechar">✕</button></div>
+            <div class="modal-corpo formulario">
+                <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                <input type="hidden" name="id">
+                <div class="campo">
+                        <label for="item-nome">Nome <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="item-nome" name="nome" type="text" required aria-required="true" aria-describedby="erro-nome" maxlength="60">
+                        <p class="erro-campo" id="erro-nome" aria-live="polite"></p>
+                    </div>
+                <div class="grade-2">
+                <div class="campo">
+                        <label for="item-tipo">Tipo <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <select id="item-tipo" name="tipo" required aria-required="true" aria-describedby="erro-tipo" ><option value="SERVICO">Serviço</option><option value="PRODUTO">Produto</option></select>
+                        <p class="erro-campo" id="erro-tipo" aria-live="polite"></p>
+                    </div>
+                <div class="campo">
+                        <label for="item-preco">Preço (R$) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="item-preco" name="preco" type="text" required aria-required="true" aria-describedby="erro-preco ajuda-preco" inputmode="decimal">
+                        <span class="ajuda" id="ajuda-preco">Aceita 35, 35,90 ou R$ 35,90.</span>
+                        <p class="erro-campo" id="erro-preco" aria-live="polite"></p>
+                    </div>
+                </div>
+                <div class="campo"><label for="item-descricao">Descrição (aparece no site)</label><textarea id="item-descricao" name="descricao" rows="2" maxlength="140"></textarea></div>
+            </div>
+            <div class="modal-rodape"><button type="button" class="btn btn-secundario" data-fechar>Cancelar</button><button type="submit" class="btn btn-primario">Salvar</button></div>
+        </form>
+    </dialog>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/servicos.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cadastro de barbeiros e gerentes.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Funcionários · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="funcionarios.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Funcionários</h1>
+                    <p class="subtitulo">Barbeiros e gerentes</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <section class="card barra-ferramentas" aria-label="Pesquisa de funcionários">
+                    <div class="campo campo-busca">
+                        <label for="busca">Buscar por nome ou CPF</label>
+                        <input id="busca" type="search" autocomplete="off">
+                    </div>
+                    <div class="campo">
+                        <label for="filtro-perfil">Perfil</label>
+                        <select id="filtro-perfil"><option value="">Todos</option><option value="BARBEIRO">Barbeiros</option><option value="GERENTE">Gerentes</option></select>
+                    </div>
+                    <button type="button" class="btn btn-primario" id="btn-novo">Cadastrar funcionário</button>
+                </section>
+                <p class="alerta alerta-info" id="aviso-gerente" hidden>Como gerente, você pode editar os dados dos barbeiros, mas não pode alterar comissões nem cadastrar ou remover funcionários.</p>
+                <div class="grade-equipe-interna" id="cards-equipe"></div>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <dialog class="modal" id="modal-funcionario" aria-labelledby="modal-func-titulo">
+        <form id="form-funcionario" novalidate>
+            <div class="modal-cabecalho"><h2 id="modal-func-titulo">Cadastrar funcionário</h2><button type="button" class="btn-icone" data-fechar aria-label="Fechar">✕</button></div>
+            <div class="modal-corpo formulario">
+                <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                <input type="hidden" name="id">
+                <fieldset id="grupo-perfil">
+                    <legend>Perfil</legend>
+                    <div class="linha">
+                        <label class="check"><input type="radio" name="perfil" value="BARBEIRO" checked> Barbeiro</label>
+                        <label class="check"><input type="radio" name="perfil" value="GERENTE"> Gerente</label>
+                    </div>
+                </fieldset>
+                <div class="campo">
+                        <label for="func-nome">Nome <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="func-nome" name="nome" type="text" required aria-required="true" aria-describedby="erro-nome" maxlength="80">
+                        <p class="erro-campo" id="erro-nome" aria-live="polite"></p>
+                    </div>
+                <div class="grade-2">
+                <div class="campo">
+                        <label for="func-cpf">CPF (login de acesso) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="func-cpf" name="cpf" type="text" required aria-required="true" aria-describedby="erro-cpf" inputmode="numeric" data-mascara="cpf" maxlength="14">
+                        <p class="erro-campo" id="erro-cpf" aria-live="polite"></p>
+                    </div>
+                <div class="campo">
+                        <label for="func-telefone">Telefone <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="func-telefone" name="telefone" type="tel" required aria-required="true" aria-describedby="erro-telefone" inputmode="numeric" data-mascara="telefone">
+                        <p class="erro-campo" id="erro-telefone" aria-live="polite"></p>
+                    </div>
+                </div>
+                <div class="campo">
+                        <label for="func-email">E-mail (recuperação de senha) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="func-email" name="email" type="email" required aria-required="true" aria-describedby="erro-email" >
+                        <p class="erro-campo" id="erro-email" aria-live="polite"></p>
+                    </div>
+                <div class="grade-2 so-barbeiro">
+                <div class="campo">
+                        <label for="func-comissao">Comissão (%) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="func-comissao" name="comissao" type="text" required aria-required="true" aria-describedby="erro-comissao ajuda-comissao" inputmode="decimal" placeholder="40">
+                        <span class="ajuda" id="ajuda-comissao">De 0 a 100. Padrão: 40%.</span>
+                        <p class="erro-campo" id="erro-comissao" aria-live="polite"></p>
+                    </div>
+                <div class="campo">
+                        <label for="func-especialidade">Especialidade</label>
+                        <input id="func-especialidade" name="especialidade" type="text" aria-describedby="erro-especialidade" maxlength="40" placeholder="Ex.: Fade e degradê">
+                        <p class="erro-campo" id="erro-especialidade" aria-live="polite"></p>
+                    </div>
+                </div>
+                <label class="check so-barbeiro"><input type="checkbox" name="ativo" checked> Ativo (recebe agendamentos)</label>
+                <p class="alerta alerta-dourado" id="aviso-senha-inicial">O login será o CPF e a senha inicial será <strong>123</strong>. O funcionário pode trocá-la em “Alterar senha”.</p>
+            </div>
+            <div class="modal-rodape"><button type="button" class="btn btn-secundario" data-fechar>Cancelar</button><button type="submit" class="btn btn-primario">Salvar</button></div>
+        </form>
+    </dialog>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/funcionarios.js" defer></script>
+</body>
+</html>

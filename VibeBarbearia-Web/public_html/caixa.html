@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Movimentos de caixa da barbearia.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Caixa · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="caixa.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Caixa</h1>
+                    <p class="subtitulo">Movimentos, totais e comissões</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <p class="alerta alerta-info" id="aviso-barbeiro" hidden>Você está vendo apenas os seus atendimentos.</p>
+                <form class="card barra-ferramentas" id="form-filtros" novalidate aria-label="Filtros do caixa">
+                    <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                    <div class="campo">
+                        <label for="cx-inicio">Período de</label>
+                        <input id="cx-inicio" name="inicio" type="text" aria-describedby="erro-inicio" inputmode="numeric" data-mascara="data" maxlength="10">
+                        <p class="erro-campo" id="erro-inicio" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="cx-fim">até</label>
+                        <input id="cx-fim" name="fim" type="text" aria-describedby="erro-fim" inputmode="numeric" data-mascara="data" maxlength="10">
+                        <p class="erro-campo" id="erro-fim" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="cx-cliente">Cliente</label>
+                        <select id="cx-cliente" name="cliente" aria-describedby="erro-cliente" ></select>
+                        <p class="erro-campo" id="erro-cliente" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="cx-barbeiro">Barbeiro</label>
+                        <select id="cx-barbeiro" name="barbeiro" aria-describedby="erro-barbeiro" ></select>
+                        <p class="erro-campo" id="erro-barbeiro" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="cx-forma">Pagamento</label>
+                        <select id="cx-forma" name="forma" aria-describedby="erro-forma" ><option value="">Todas as formas</option><option value="DINHEIRO">Dinheiro</option><option value="CARTAO">Cartão</option><option value="PIX">PIX</option></select>
+                        <p class="erro-campo" id="erro-forma" aria-live="polite"></p>
+                    </div>
+                    <div class="campo campo-busca"><label for="cx-texto">Buscar</label><input id="cx-texto" name="texto" type="search" placeholder="Cliente, barbeiro, valor ou forma de pagamento"></div>
+                    <div class="linha">
+                        <button type="submit" class="btn btn-primario">Aplicar</button>
+                        <button type="button" class="btn btn-secundario btn-peq" data-periodo="hoje">Hoje</button>
+                        <button type="button" class="btn btn-secundario btn-peq" data-periodo="mes">Este mês</button>
+                        <button type="button" class="btn btn-texto" id="btn-limpar">Limpar filtros</button>
+                    </div>
+                </form>
+                <section class="grade-4" id="cx-kpis" aria-label="Totais do período"></section>
+                <section class="card" aria-labelledby="cx-tabela-titulo">
+                    <div class="card-titulo"><h2 id="cx-tabela-titulo">Movimentos <span class="texto-secundario" id="cx-contagem"></span></h2>
+                        <button type="button" class="btn btn-secundario btn-peq" id="btn-csv">Exportar CSV</button></div>
+                    <div class="tabela-container">
+                        <table class="tabela tabela-responsiva">
+                            <caption class="visualmente-oculto">Movimentos do caixa no período filtrado</caption>
+                            <thead><tr><th scope="col">Data</th><th scope="col">Hora</th><th scope="col">Cliente</th><th scope="col">Barbeiro</th><th scope="col">Serviços</th><th scope="col">Pagamento</th><th scope="col" class="num">Valor</th><th scope="col" class="num">Comissão</th></tr></thead>
+                            <tbody id="tabela-caixa"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/caixa.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Relatórios gerenciais da barbearia.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Relatórios · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="relatorios.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Relatórios</h1>
+                    <p class="subtitulo">Desempenho do negócio por período</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <form class="card barra-ferramentas" id="form-periodo" novalidate aria-label="Período do relatório">
+                    <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                    <div class="campo">
+                        <label for="rel-inicio">Período de</label>
+                        <input id="rel-inicio" name="inicio" type="text" aria-describedby="erro-inicio" inputmode="numeric" data-mascara="data" maxlength="10">
+                        <p class="erro-campo" id="erro-inicio" aria-live="polite"></p>
+                    </div>
+                    <div class="campo">
+                        <label for="rel-fim">até</label>
+                        <input id="rel-fim" name="fim" type="text" aria-describedby="erro-fim" inputmode="numeric" data-mascara="data" maxlength="10">
+                        <p class="erro-campo" id="erro-fim" aria-live="polite"></p>
+                    </div>
+                    <div class="linha">
+                        <button type="submit" class="btn btn-primario">Gerar</button>
+                        <button type="button" class="btn btn-secundario btn-peq" data-periodo="hoje">Hoje</button>
+                        <button type="button" class="btn btn-secundario btn-peq" data-periodo="mes">Este mês</button>
+                        <button type="button" class="btn btn-secundario btn-peq" data-periodo="30">Últimos 30 dias</button>
+                    </div>
+                    <div class="linha acoes-relatorio">
+                        <button type="button" class="btn btn-secundario btn-peq" id="btn-csv">Exportar CSV</button>
+                        <button type="button" class="btn btn-secundario btn-peq" id="btn-imprimir">Imprimir</button>
+                    </div>
+                </form>
+                <div class="abas" role="tablist" aria-label="Tipo de relatório" id="abas-relatorio">
+                    <button type="button" class="aba" role="tab" id="aba-resumo" aria-controls="painel-relatorio" aria-selected="true" data-rel="resumo">Resumo geral</button>
+                    <button type="button" class="aba" role="tab" id="aba-barbeiros" aria-controls="painel-relatorio" aria-selected="false" data-rel="barbeiros">Desempenho por barbeiro</button>
+                    <button type="button" class="aba" role="tab" id="aba-pagamentos" aria-controls="painel-relatorio" aria-selected="false" data-rel="pagamentos">Formas de pagamento</button>
+                    <button type="button" class="aba" role="tab" id="aba-agenda" aria-controls="painel-relatorio" aria-selected="false" data-rel="agenda">Agenda</button>
+                    <button type="button" class="aba" role="tab" id="aba-clientes" aria-controls="painel-relatorio" aria-selected="false" data-rel="clientes">Clientes</button>
+                    <button type="button" class="aba" role="tab" id="aba-servicos" aria-controls="painel-relatorio" aria-selected="false" data-rel="servicos">Serviços mais realizados</button>
+                </div>
+                <section id="painel-relatorio" role="tabpanel" aria-labelledby="aba-resumo" class="painel-relatorio"></section>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/graficos.js" defer></script>
+    <script src="js/paginas/relatorios.js" defer></script>
+</body>
+</html>

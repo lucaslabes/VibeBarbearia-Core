@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Registro e finalização de atendimentos.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Registro de Atendimento · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="atendimento.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Registro de Atendimento</h1>
+                    <p class="subtitulo">Finalize o atendimento, calcule comissão e pontos</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <div class="atendimento-grade">
+                    <form id="form-atendimento" class="card formulario" novalidate>
+                        <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                        <div class="campo">
+                        <label for="at-agendamento">Agendamento (pendente) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <select id="at-agendamento" name="agendamento" required aria-required="true" aria-describedby="erro-agendamento" ></select>
+                        <p class="erro-campo" id="erro-agendamento" aria-live="polite"></p>
+                    </div>
+                        <div class="cliente-info" id="cliente-info" aria-live="polite"></div>
+                        <fieldset>
+                            <legend>Serviços e produtos <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                            <div class="campo"><label for="at-busca" class="visualmente-oculto">Filtrar itens</label><input id="at-busca" type="search" placeholder="Filtrar itens…" autocomplete="off"></div>
+                            <div class="lista-itens" id="lista-itens" role="group" aria-describedby="erro-itens"></div>
+                            <p class="erro-campo" id="erro-itens" aria-live="polite"></p>
+                            <input type="hidden" name="itens">
+                        </fieldset>
+                        <fieldset>
+                            <legend>Forma de Pagamento <span class="obrigatorio" aria-hidden="true">*</span></legend>
+                            <div class="chips chips-pagamento" role="radiogroup" aria-describedby="erro-pagamento">
+                                <label class="chip"><input type="radio" name="pagamento" value="PIX"><span class="chip-titulo">PIX</span></label>
+                                <label class="chip"><input type="radio" name="pagamento" value="CARTAO"><span class="chip-titulo">Cartão</span></label>
+                                <label class="chip"><input type="radio" name="pagamento" value="DINHEIRO"><span class="chip-titulo">Dinheiro</span></label>
+                            </div>
+                            <p class="erro-campo" id="erro-pagamento" aria-live="polite"></p>
+                        </fieldset>
+                        <div class="resgate card-interno">
+                            <label class="check"><input type="checkbox" id="at-resgatar" name="resgatar"> Resgatar pontos de fidelidade</label>
+                            <p class="ajuda" id="resgate-ajuda">100 pontos = R$ 10 de desconto, até 50% do valor.</p>
+                        </div>
+                        <button type="submit" class="btn btn-primario btn-bloco">Finalizar Atendimento</button>
+                    </form>
+                    <aside class="card recibo" aria-labelledby="recibo-titulo" aria-live="polite">
+                        <h2 id="recibo-titulo">Resumo do atendimento</h2>
+                        <ul class="recibo-itens" id="recibo-itens"><li class="texto-secundario">Nenhum item selecionado.</li></ul>
+                        <dl>
+                            <dt>Subtotal</dt><dd id="rc-bruto">R$ 0,00</dd>
+                            <dt>Desconto fidelidade</dt><dd id="rc-desconto">R$ 0,00</dd>
+                            <hr>
+                            <dt>Total a pagar</dt><dd class="total" id="rc-pago">R$ 0,00</dd>
+                            <dt id="rc-comissao-rotulo">Comissão do barbeiro</dt><dd id="rc-comissao">R$ 0,00</dd>
+                            <dt>Pontos ganhos</dt><dd id="rc-pontos">0</dd>
+                            <dt>Saldo de pontos após</dt><dd id="rc-saldo">—</dd>
+                        </dl>
+                    </aside>
+                </div>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <dialog class="modal" id="modal-concluido" aria-labelledby="modal-conc-titulo">
+        <div class="modal-cabecalho"><h2 id="modal-conc-titulo">Atendimento Concluído</h2><button type="button" class="btn-icone" data-fechar aria-label="Fechar">✕</button></div>
+        <div class="modal-corpo" id="concluido-corpo"></div>
+        <div class="modal-rodape"><button type="button" class="btn btn-secundario" id="btn-imprimir">Imprimir recibo</button><button type="button" class="btn btn-primario" data-fechar>Fechar</button></div>
+    </dialog>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/atendimento.js" defer></script>
+</body>
+</html>

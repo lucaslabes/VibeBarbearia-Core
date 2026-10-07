@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Agenda de horários da barbearia.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Agenda de Horários · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="agenda.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Agenda de Horários</h1>
+                    <p class="subtitulo">Agendamentos por dia e por barbeiro</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <p class="alerta alerta-info" id="aviso-consulta" hidden>Modo consulta — sem permissão para cadastrar/editar.</p>
+                <section class="card barra-ferramentas" aria-label="Filtros da agenda">
+                    <div class="navegacao-dia linha">
+                        <button type="button" class="btn-icone" id="dia-anterior" aria-label="Dia anterior">‹</button>
+                        <button type="button" class="btn btn-secundario btn-peq" id="dia-hoje">Hoje</button>
+                        <button type="button" class="btn-icone" id="dia-seguinte" aria-label="Próximo dia">›</button>
+                    </div>
+                    <form id="form-dia" class="linha" novalidate>
+                        <div class="campo">
+                            <label for="filtro-data">Data (dd/mm/aaaa)</label>
+                            <input id="filtro-data" name="dataFiltro" inputmode="numeric" data-mascara="data" aria-describedby="erro-dataFiltro" maxlength="10">
+                            <p class="erro-campo" id="erro-dataFiltro" aria-live="polite"></p>
+                        </div>
+                        <button type="submit" class="btn btn-secundario">Ir</button>
+                    </form>
+                    <div class="campo">
+                        <label for="filtro-barbeiro">Barbeiro</label>
+                        <select id="filtro-barbeiro"></select>
+                    </div>
+                    <div class="alternar-visao" role="group" aria-label="Modo de visualização">
+                        <button type="button" class="btn btn-secundario btn-peq" data-visao="lista" aria-pressed="true">Lista</button>
+                        <button type="button" class="btn btn-secundario btn-peq" data-visao="linha" aria-pressed="false">Linha do tempo</button>
+                    </div>
+                    <button type="button" class="btn btn-primario" id="btn-novo">Novo Agendamento</button>
+                </section>
+                <h2 class="titulo-dia" id="titulo-dia" aria-live="polite"></h2>
+                <section id="visao-lista" aria-label="Agendamentos do dia em lista">
+                    <div class="tabela-container">
+                        <table class="tabela tabela-responsiva">
+                            <caption class="visualmente-oculto">Agendamentos do dia selecionado</caption>
+                            <thead><tr><th scope="col">Hora</th><th scope="col">Cliente</th><th scope="col">Barbeiro</th><th scope="col">Status</th><th scope="col">Origem</th><th scope="col" class="direita">Ações</th></tr></thead>
+                            <tbody id="tabela-agenda"></tbody>
+                        </table>
+                    </div>
+                </section>
+                <section id="visao-linha" class="card" hidden aria-label="Linha do tempo por barbeiro">
+                    <div class="linha-tempo" id="linha-tempo"></div>
+                </section>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <dialog class="modal" id="modal-agendamento" aria-labelledby="modal-ag-titulo">
+        <form id="form-agendamento" novalidate>
+            <div class="modal-cabecalho"><h2 id="modal-ag-titulo">Novo Agendamento</h2><button type="button" class="btn-icone" data-fechar aria-label="Fechar">✕</button></div>
+            <div class="modal-corpo formulario">
+                <p class="erro-formulario" tabindex="-1" role="alert"></p>
+                <input type="hidden" name="id">
+                <div class="campo">
+                        <label for="ag-cliente">Cliente <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <select id="ag-cliente" name="cliente" required aria-required="true" aria-describedby="erro-cliente" ></select>
+                        <p class="erro-campo" id="erro-cliente" aria-live="polite"></p>
+                    </div>
+                <div class="campo">
+                        <label for="ag-barbeiro">Barbeiro <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <select id="ag-barbeiro" name="barbeiro" required aria-required="true" aria-describedby="erro-barbeiro" ></select>
+                        <p class="erro-campo" id="erro-barbeiro" aria-live="polite"></p>
+                    </div>
+                <div class="grade-2">
+                <div class="campo">
+                        <label for="ag-data">Data (dd/mm/aaaa) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="ag-data" name="data" type="text" required aria-required="true" aria-describedby="erro-data" inputmode="numeric" data-mascara="data" maxlength="10" placeholder="15/10/2026">
+                        <p class="erro-campo" id="erro-data" aria-live="polite"></p>
+                    </div>
+                <div class="campo">
+                        <label for="ag-hora">Horário (HH:mm) <span class="obrigatorio" aria-hidden="true">*</span></label>
+                        <input id="ag-hora" name="hora" type="text" required aria-required="true" aria-describedby="erro-hora" inputmode="numeric" data-mascara="hora" maxlength="5" placeholder="14:30">
+                        <p class="erro-campo" id="erro-hora" aria-live="polite"></p>
+                    </div>
+                </div>
+                <div>
+                    <p class="rotulo" id="sugestoes-rotulo">Horários livres deste barbeiro no dia</p>
+                    <div class="horarios horarios-compactos" id="sugestoes" role="group" aria-labelledby="sugestoes-rotulo"></div>
+                </div>
+            </div>
+            <div class="modal-rodape"><button type="button" class="btn btn-secundario" data-fechar>Cancelar</button><button type="submit" class="btn btn-primario">Salvar</button></div>
+        </form>
+    </dialog>
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/paginas/agenda.js" defer></script>
+</body>
+</html>

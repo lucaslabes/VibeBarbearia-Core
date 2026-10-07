@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-tema="escuro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Indicadores do dia, do mês e do ano.">
+    <meta name="theme-color" content="#0a0a0a">
+    <title>Dashboard · Vibe Barbearia</title>
+    <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/componentes.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/paginas.css">
+    <script src="js/tema.js"></script>
+</head>
+<body class="area-interna" data-pagina="dashboard.html">
+    <a class="pular-conteudo" href="#conteudo">Pular para o conteúdo</a>
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Menu principal">
+            <a class="marca" href="dashboard.html" aria-label="Vibe Barbearia — dashboard">
+                <img src="img/logo.svg" alt="" width="38" height="38">
+                <span class="marca-texto"><strong>VIBE</strong><small>BARBEARIA</small></span>
+            </a>
+            <nav aria-label="Seções do sistema">
+                <ul class="menu" id="menu"><!-- montado por ui.js conforme o perfil --></ul>
+            </nav>
+            <div class="usuario-box" id="usuario-box"></div>
+            <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </aside>
+        <div class="fundo-menu" id="fundo-menu"></div>
+        <div class="principal">
+            <header class="topbar">
+                <button type="button" class="btn-icone btn-menu-app" id="btn-menu" aria-controls="sidebar" aria-expanded="false" aria-label="Abrir menu"></button>
+                <div>
+                    <h1>Dashboard</h1>
+                    <p class="subtitulo">Visão geral do dia</p>
+                </div>
+                <div class="topbar-acoes">
+                    <button type="button" class="btn-icone" data-alternar-tema></button>
+                </div>
+            </header>
+            <main id="conteudo" class="pagina" tabindex="-1">
+
+                <section class="saudacao linha-entre" aria-label="Saudação">
+                    <div>
+                        <h2 id="saudacao">Olá!</h2>
+                        <p class="texto-secundario" id="data-hoje"></p>
+                    </div>
+                    <div class="linha" id="atalhos"></div>
+                </section>
+                <section aria-labelledby="kpi-titulo">
+                    <h2 id="kpi-titulo" class="visualmente-oculto">Indicadores</h2>
+                    <div class="grade-3" id="kpis"></div>
+                </section>
+                <div class="dash-grade">
+                    <section class="card" aria-labelledby="graf-titulo">
+                        <div class="card-titulo"><h2 id="graf-titulo">Faturamento — últimos 14 dias</h2></div>
+                        <canvas id="graf-faturamento" data-altura="260"></canvas>
+                    </section>
+                    <section class="card" aria-labelledby="prox-titulo">
+                        <div class="card-titulo"><h2 id="prox-titulo">Próximos atendimentos de hoje</h2><a class="btn btn-texto" href="agenda.html">Ver agenda</a></div>
+                        <ul class="lista-proximos" id="lista-proximos"></ul>
+                    </section>
+                </div>
+            </main>
+            <footer class="rodape-app">Vibe Barbearia © 2026 | Sistema de Gestão Premium</footer>
+        </div>
+    </div>
+
+    <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+    <script src="js/regras.js" defer></script>
+    <script src="js/dados-mock.js" defer></script>
+    <script src="js/auth.js" defer></script>
+    <script src="js/servicos.js" defer></script>
+    <script src="js/ui.js" defer></script>
+    <script src="js/graficos.js" defer></script>
+    <script src="js/paginas/dashboard.js" defer></script>
+</body>
+</html>
