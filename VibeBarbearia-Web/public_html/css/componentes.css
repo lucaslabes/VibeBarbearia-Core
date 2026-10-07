@@ -1,0 +1,246 @@
+/* =====================================================================
+   Vibe Barbearia — componentes.css
+   Componentes reutilizáveis: botões, formulários, cards, KPIs, tabelas,
+   badges, modal, toast, abas, passos (stepper), horários e chips.
+   ===================================================================== */
+
+/* ---------- Botões (botão dourado = criarBotaoDourado do desktop) ---------- */
+.btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    min-height: 44px;                      /* área de toque mínima (mobile) */
+    padding: .6rem 1.2rem;
+    border: 1px solid transparent; border-radius: var(--raio-peq);
+    font-weight: 700; font-size: .9rem; letter-spacing: .02em;
+    text-decoration: none; cursor: pointer;
+    transition: background var(--transicao), border-color var(--transicao), transform var(--transicao), color var(--transicao);
+}
+.btn:active { transform: translateY(1px); }
+.btn[disabled] { opacity: .5; cursor: not-allowed; }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.btn-primario { background: var(--dourado); color: var(--sobre-dourado); }
+.btn-primario:hover { background: var(--dourado-claro); color: var(--sobre-dourado); }
+.btn-secundario { background: transparent; color: var(--texto); border-color: var(--borda); }
+.btn-secundario:hover { border-color: var(--dourado); color: var(--dourado-texto); }
+.btn-perigo { background: transparent; color: var(--erro); border-color: var(--erro); }
+.btn-perigo:hover { background: var(--erro); color: #fff; }
+.btn-texto { background: none; border: none; color: var(--dourado-texto); padding-inline: .4rem; min-height: 36px; }
+.btn-texto:hover { text-decoration: underline; }
+.btn-bloco { width: 100%; }
+.btn-peq { min-height: 34px; padding: .3rem .75rem; font-size: .82rem; }
+.btn-icone {
+    width: 42px; height: 42px; padding: 0; border-radius: 50%;
+    background: transparent; border: 1px solid var(--borda); color: var(--texto);
+    display: inline-grid; place-items: center; cursor: pointer;
+}
+.btn-icone:hover { border-color: var(--dourado); color: var(--dourado-texto); }
+.btn-icone svg { width: 20px; height: 20px; }
+
+/* ---------- Formulários ---------- */
+.formulario { display: grid; gap: 1rem; }
+.campo { display: grid; gap: .35rem; align-content: start; }
+.campo > label, .rotulo { font-size: .85rem; font-weight: 600; color: var(--texto-2); }
+.campo .obrigatorio { color: var(--dourado-texto); }
+.entrada, .campo input:not([type="checkbox"]):not([type="radio"]), .campo select, .campo textarea {
+    width: 100%; min-height: 44px;
+    padding: .6rem .85rem;
+    background: var(--cor-campo); color: var(--texto);
+    border: 1px solid var(--borda); border-radius: var(--raio-peq);
+    caret-color: var(--dourado);
+    transition: border-color var(--transicao), box-shadow var(--transicao);
+}
+.campo input:focus, .campo select:focus, .campo textarea:focus, .entrada:focus {
+    outline: none; border-color: var(--dourado); box-shadow: 0 0 0 3px rgba(212, 175, 55, .25);
+}
+.campo [aria-invalid="true"] { border-color: var(--erro); box-shadow: 0 0 0 3px rgba(255, 107, 94, .18); }
+.campo .ajuda { font-size: .78rem; color: var(--texto-2); }
+.erro-campo { min-height: 1.1em; font-size: .8rem; color: var(--erro); font-weight: 600; }
+.erro-campo:empty { min-height: 0; }
+.erro-formulario {
+    padding: .7rem 1rem; border-radius: var(--raio-peq);
+    border: 1px solid var(--erro); color: var(--erro); background: rgba(255, 107, 94, .08);
+    font-weight: 600;
+}
+.erro-formulario:empty { display: none; }
+.campo-senha { position: relative; }
+.campo-senha input { padding-right: 3rem; }
+.campo-senha .mostrar-senha {
+    position: absolute; right: .35rem; top: 50%; transform: translateY(-50%);
+    border: 0; background: none; color: var(--texto-2); cursor: pointer; padding: .4rem; min-height: 0;
+}
+.check { display: flex; align-items: center; gap: .6rem; cursor: pointer; }
+.check input { width: 20px; height: 20px; accent-color: var(--dourado); }
+.acoes-formulario { display: flex; gap: .75rem; justify-content: flex-end; flex-wrap: wrap; margin-top: .5rem; }
+fieldset { border: 1px solid var(--borda); border-radius: var(--raio); padding: 1rem; margin: 0; }
+legend { padding: 0 .4rem; font-weight: 700; color: var(--dourado-texto); }
+
+/* ---------- Cards e KPIs (criarCardKPI do desktop) ---------- */
+.card {
+    background: var(--cor-card);
+    border: 1px solid var(--borda);
+    border-radius: var(--raio);
+    padding: 1.25rem;
+    box-shadow: var(--sombra-leve);
+}
+.card-titulo { display: flex; align-items: center; justify-content: space-between; gap: .5rem; margin-bottom: 1rem; }
+.card-titulo h2, .card-titulo h3 { margin: 0; }
+.card-titulo .btn { white-space: nowrap; }
+.kpi {
+    background: var(--cor-card);
+    border: 1px solid var(--dourado);
+    border-radius: var(--raio);
+    padding: 1.2rem 1.35rem;
+    display: grid; gap: .35rem;
+}
+.kpi-topo { display: flex; justify-content: space-between; color: var(--texto-2); font-size: .82rem; }
+.kpi-icone { color: var(--dourado-texto); font-size: 1.1rem; line-height: 1; }
+.kpi-valor { font-size: var(--tam-kpi); font-weight: 700; line-height: 1.1; }
+.kpi-rodape { font-size: .78rem; color: var(--texto-2); }
+
+/* ---------- Tabelas (cabeçalho dourado como o JTable do desktop) ---------- */
+.tabela-container { overflow-x: auto; border-radius: var(--raio); border: 1px solid var(--borda); }
+.tabela { width: 100%; border-collapse: collapse; background: var(--cor-card); font-size: .88rem; }
+.tabela caption { text-align: left; padding: .75rem 1rem; color: var(--texto-2); caption-side: bottom; font-size: .8rem; }
+.tabela th {
+    background: var(--dourado); color: var(--sobre-dourado);
+    text-align: left; padding: .7rem .9rem; font-weight: 700; white-space: nowrap;
+}
+.tabela td { padding: .65rem .9rem; border-top: 1px solid var(--borda); vertical-align: middle; }
+.tabela tbody tr:hover { background: var(--cor-hover); }
+.tabela tbody tr.selecionada { background: rgba(212, 175, 55, .16); }
+.tabela .acoes { white-space: nowrap; text-align: right; }
+.tabela .vazio { text-align: center; color: var(--texto-2); padding: 2rem; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* No celular cada linha vira um card (data-label vem do cabeçalho) */
+@media (max-width: 700px) {
+    .tabela-responsiva thead { position: absolute; left: -9999px; }
+    .tabela-responsiva, .tabela-responsiva tbody, .tabela-responsiva tr, .tabela-responsiva td { display: block; width: 100%; }
+    .tabela-responsiva tr { border-top: 1px solid var(--borda); padding: .5rem 0; }
+    .tabela-responsiva td { border: 0; padding: .3rem 1rem; display: flex; justify-content: space-between; gap: 1rem; text-align: right; }
+    .tabela-responsiva td::before { content: attr(data-label); font-weight: 600; color: var(--texto-2); text-align: left; }
+    .tabela-responsiva td.acoes { justify-content: flex-end; }
+    .tabela-responsiva td.acoes::before, .tabela-responsiva td.vazio::before { content: none; }
+}
+
+/* ---------- Badges de status (cores de status do desktop) ---------- */
+.badge {
+    display: inline-flex; align-items: center; gap: .3rem;
+    padding: .15rem .6rem; border-radius: 999px;
+    font-size: .75rem; font-weight: 700; white-space: nowrap;
+    border: 1px solid currentColor;
+}
+.badge-agendado { color: var(--laranja); }
+.badge-concluido { color: var(--verde); }
+.badge-online { color: var(--azul); }
+.badge-inativo { color: var(--texto-2); }
+.badge-dourado { color: var(--dourado-texto); }
+
+/* ---------- Modal (<dialog>) ---------- */
+dialog.modal {
+    width: min(560px, calc(100vw - 2rem));
+    max-height: calc(100vh - 2rem);
+    padding: 0; border: 1px solid var(--dourado); border-radius: var(--raio);
+    background: var(--cor-card); color: var(--texto);
+    box-shadow: var(--sombra);
+}
+dialog.modal::backdrop { background: rgba(0, 0, 0, .65); backdrop-filter: blur(2px); }
+.modal-cabecalho { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-bottom: 1px solid var(--borda); }
+.modal-cabecalho h2 { margin: 0; font-size: 1.15rem; }
+.modal-corpo { padding: 1.25rem; overflow-y: auto; }
+.modal-rodape { display: flex; justify-content: flex-end; gap: .75rem; padding: 1rem 1.25rem; border-top: 1px solid var(--borda); flex-wrap: wrap; }
+
+/* ---------- Toast (mensagens de sucesso/erro, substitui o JOptionPane) ---------- */
+.toasts { position: fixed; right: 1rem; bottom: 1rem; z-index: 999; display: grid; gap: .5rem; max-width: min(380px, calc(100vw - 2rem)); }
+.toast {
+    display: flex; gap: .75rem; align-items: flex-start;
+    padding: .85rem 1rem; border-radius: var(--raio-peq);
+    background: var(--cor-card); color: var(--texto);
+    border-left: 4px solid var(--dourado); box-shadow: var(--sombra);
+    animation: entrar .25s ease;
+}
+.toast-sucesso { border-left-color: var(--verde); }
+.toast-erro { border-left-color: var(--erro); }
+@keyframes entrar { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ---------- Alertas ---------- */
+.alerta { padding: .85rem 1rem; border-radius: var(--raio-peq); border: 1px solid var(--borda); background: var(--cor-card); }
+.alerta-info { border-color: var(--azul); }
+.alerta-dourado { border-color: var(--dourado); background: rgba(212, 175, 55, .08); }
+.alerta-sucesso { border-color: var(--verde); background: rgba(46, 204, 113, .08); }
+
+/* ---------- Abas ---------- */
+.abas { display: flex; gap: .25rem; border-bottom: 1px solid var(--borda); margin-bottom: 1rem; overflow-x: auto; }
+.aba {
+    background: none; border: 0; border-bottom: 3px solid transparent;
+    padding: .7rem 1rem; color: var(--texto-2); cursor: pointer; white-space: nowrap; font-weight: 600;
+}
+.aba[aria-selected="true"] { color: var(--dourado-texto); border-bottom-color: var(--dourado); }
+
+/* ---------- Passos (agendamento online) ---------- */
+.passos { display: flex; gap: .5rem; list-style: none; padding: 0; margin: 0 0 1.5rem; counter-reset: passo; }
+.passos li {
+    flex: 1; display: flex; align-items: center; gap: .5rem;
+    color: var(--texto-2); font-size: .85rem; font-weight: 600;
+    padding-bottom: .5rem; border-bottom: 3px solid var(--borda);
+}
+.passos li::before {
+    counter-increment: passo; content: counter(passo);
+    display: inline-grid; place-items: center; width: 26px; height: 26px; flex: none;
+    border-radius: 50%; border: 2px solid currentColor; font-size: .8rem;
+}
+.passos li.atual { color: var(--dourado-texto); border-bottom-color: var(--dourado); }
+.passos li.feito { color: var(--verde); border-bottom-color: var(--verde); }
+@media (max-width: 600px) { .passos li span { display: none; } .passos li { justify-content: center; } }
+
+/* ---------- Chips selecionáveis (serviços, barbeiros, datas) ---------- */
+.chips { display: grid; gap: .6rem; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.chip {
+    position: relative; display: grid; gap: .15rem;
+    padding: .85rem 1rem; border-radius: var(--raio);
+    background: var(--cor-card); border: 1px solid var(--borda);
+    cursor: pointer; text-align: left; transition: border-color var(--transicao), background var(--transicao);
+}
+.chip:hover { border-color: var(--dourado-escuro); }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.chip:has(input:checked), .chip[aria-pressed="true"] { border-color: var(--dourado); background: rgba(212, 175, 55, .12); }
+.chip:has(input:focus-visible) { outline: 3px solid var(--dourado); outline-offset: 2px; }
+.chip-titulo { font-weight: 700; }
+.chip-detalhe { font-size: .82rem; color: var(--texto-2); }
+.chip-preco { font-weight: 700; color: var(--dourado-texto); }
+
+/* ---------- Grade de horários (slots) ---------- */
+.horarios { display: grid; gap: .5rem; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
+.horario {
+    min-height: 44px; border-radius: var(--raio-peq);
+    border: 1px solid var(--borda); background: var(--cor-card); color: var(--texto);
+    font-weight: 700; cursor: pointer; font-variant-numeric: tabular-nums;
+}
+.horario:hover:not([disabled]) { border-color: var(--dourado); }
+.horario[aria-pressed="true"] { background: var(--dourado); color: var(--sobre-dourado); border-color: var(--dourado); }
+.horario[disabled] { opacity: .35; text-decoration: line-through; cursor: not-allowed; }
+.legenda { display: flex; gap: 1rem; flex-wrap: wrap; font-size: .8rem; color: var(--texto-2); }
+.legenda span::before { content: ""; display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: .35rem; vertical-align: -1px; border: 1px solid var(--borda); }
+.legenda .l-livre::before { background: var(--cor-card); }
+.legenda .l-sel::before { background: var(--dourado); }
+.legenda .l-ocupado::before { background: var(--borda); opacity: .5; }
+
+/* ---------- Barra de progresso (fidelidade) ---------- */
+.progresso { height: 12px; border-radius: 999px; background: var(--cor-campo); border: 1px solid var(--borda); overflow: hidden; }
+.progresso > span { display: block; height: 100%; background: linear-gradient(90deg, var(--dourado-escuro), var(--dourado-claro)); transition: width .4s ease; }
+
+/* ---------- Avatar com iniciais ---------- */
+.avatar {
+    width: 44px; height: 44px; border-radius: 50%; flex: none;
+    display: grid; place-items: center;
+    background: linear-gradient(135deg, var(--dourado-escuro), var(--dourado-claro));
+    color: #000; font-weight: 800; font-size: .95rem;
+}
+.avatar-grande { width: 72px; height: 72px; font-size: 1.4rem; }
+
+/* ---------- Recibo (atendimento) ---------- */
+.recibo { font-variant-numeric: tabular-nums; }
+.recibo dl { display: grid; grid-template-columns: 1fr auto; gap: .4rem 1rem; margin: 0; }
+.recibo dt { color: var(--texto-2); }
+.recibo dd { margin: 0; text-align: right; font-weight: 600; }
+.recibo .total { font-size: 1.35rem; color: var(--dourado-texto); font-weight: 800; }
+.recibo hr { border: 0; border-top: 1px dashed var(--borda); margin: .75rem 0; grid-column: 1 / -1; width: 100%; }

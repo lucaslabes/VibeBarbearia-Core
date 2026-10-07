@@ -1,0 +1,152 @@
+/* =====================================================================
+   Vibe Barbearia — base.css
+   Tokens de design (mesma identidade visual do desktop: EstiloVibe.java),
+   reset, tipografia, tema claro/escuro e acessibilidade.
+   ===================================================================== */
+
+:root {
+    /* Cores do desktop (EstiloVibe.java) */
+    --cor-fundo: #0a0a0a;          /* FUNDO_ESCURO   rgb(10,10,10)   */
+    --cor-card: #161616;           /* FUNDO_CARD     rgb(22,22,22)   */
+    --cor-sidebar: #0f0f0f;        /* FUNDO_SIDEBAR  rgb(15,15,15)   */
+    --cor-campo: #1e1e1e;          /* TextField      rgb(30,30,30)   */
+    --cor-hover: #232323;          /* hover do menu  rgb(35,35,35)   */
+    --dourado: #d4af37;            /* DOURADO        #D4AF37         */
+    --dourado-claro: #e6c864;      /* DOURADO_CLARO  rgb(230,200,100)*/
+    --dourado-escuro: #b48c1e;     /* DOURADO_ESCURO rgb(180,140,30) */
+    --dourado-texto: #d4af37;      /* dourado usado como cor de TEXTO */
+    --texto: #f5f5f5;              /* TEXTO_CLARO                    */
+    --texto-2: #a0a0a0;            /* TEXTO_SECUNDARIO               */
+    --borda: #2d2d2d;              /* BORDA                          */
+    --verde: #2ecc71;              /* VERDE_STATUS                   */
+    --laranja: #e67e22;            /* LARANJA_STATUS                 */
+    --azul: #3498db;               /* AZUL_STATUS                    */
+    --erro: #ff6b5e;               /* novo na web: mensagens de erro  */
+    --sobre-dourado: #000;         /* texto sobre botão dourado      */
+    --sombra: 0 8px 24px rgba(0, 0, 0, .45);
+    --sombra-leve: 0 2px 8px rgba(0, 0, 0, .35);
+
+    /* Tipografia: Segoe UI, como no desktop, com alternativas do sistema */
+    --fonte: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+    --fonte-mono: Consolas, "Cascadia Mono", "SFMono-Regular", Menlo, monospace;
+    --tam-titulo: 1.625rem;        /* 26px FONTE_TITULO     */
+    --tam-subtitulo: 1rem;         /* 16px FONTE_SUBTITULO  */
+    --tam-normal: .9375rem;        /* 15px                  */
+    --tam-kpi: 2.125rem;           /* 34px FONTE_CARD_VALOR */
+
+    --raio: 10px;
+    --raio-peq: 6px;
+    --espaco: 1rem;
+    --largura-sidebar: 250px;
+    --transicao: .18s ease;
+    color-scheme: dark;
+}
+
+/* Tema claro (botão sol/lua). O dourado vira um tom mais escuro quando é
+   usado como cor de texto, para manter contraste mínimo de 4.5:1 (WCAG AA). */
+:root[data-tema="claro"] {
+    --cor-fundo: #f5f3ee;
+    --cor-card: #ffffff;
+    --cor-sidebar: #141414;        /* menu lateral continua escuro (marca) */
+    --cor-campo: #ffffff;
+    --cor-hover: #efe9da;
+    --dourado-texto: #7a5f0f;
+    --texto: #1b1b1b;
+    --texto-2: #5b5b5b;
+    --borda: #dcd5c3;
+    --verde: #1e8449;
+    --laranja: #a3540b;
+    --azul: #1f6fa8;
+    --erro: #c0392b;
+    --sombra: 0 8px 24px rgba(60, 50, 20, .14);
+    --sombra-leve: 0 2px 8px rgba(60, 50, 20, .10);
+    color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 100%; -webkit-text-size-adjust: 100%; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--fonte);
+    font-size: var(--tam-normal);
+    line-height: 1.5;
+    color: var(--texto);
+    background: var(--cor-fundo);
+    transition: background var(--transicao), color var(--transicao);
+}
+
+img, svg, canvas { max-width: 100%; display: block; }
+
+h1, h2, h3, h4 { margin: 0 0 .5rem; line-height: 1.25; font-weight: 700; }
+h1 { font-size: var(--tam-titulo); }
+h2 { font-size: 1.25rem; }
+h3 { font-size: var(--tam-subtitulo); }
+p { margin: 0 0 .75rem; }
+
+a { color: var(--dourado-texto); text-underline-offset: 3px; }
+a:hover { color: var(--dourado-claro); }
+:root[data-tema="claro"] a:hover { color: var(--dourado-escuro); }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+/* Foco sempre visível para quem navega pelo teclado */
+:focus-visible {
+    outline: 3px solid var(--dourado);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Link "pular para o conteúdo" (leitores de tela e teclado) */
+.pular-conteudo {
+    position: absolute;
+    left: -9999px;
+    top: .5rem;
+    z-index: 1000;
+    padding: .6rem 1rem;
+    background: var(--dourado);
+    color: var(--sobre-dourado);
+    font-weight: 700;
+    border-radius: var(--raio-peq);
+}
+.pular-conteudo:focus { left: .5rem; }
+
+.visualmente-oculto {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0);
+    white-space: nowrap; border: 0;
+}
+
+.texto-secundario { color: var(--texto-2); }
+.texto-dourado { color: var(--dourado-texto); }
+.texto-verde { color: var(--verde); }
+.texto-erro { color: var(--erro); }
+.mono { font-family: var(--fonte-mono); }
+.centro { text-align: center; }
+.direita { text-align: right; }
+.negrito { font-weight: 700; }
+.oculto, [hidden] { display: none !important; }
+
+.linha { display: flex; gap: var(--espaco); align-items: center; flex-wrap: wrap; }
+.linha-entre { display: flex; gap: var(--espaco); align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.pilha > * + * { margin-top: var(--espaco); }
+.grade-2 { display: grid; gap: var(--espaco); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grade-3 { display: grid; gap: var(--espaco); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grade-4 { display: grid; gap: var(--espaco); grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+@media (max-width: 900px) {
+    .grade-3, .grade-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+    .grade-2, .grade-3, .grade-4 { grid-template-columns: 1fr; }
+    :root { --tam-titulo: 1.375rem; --tam-kpi: 1.75rem; }
+}
+
+/* Respeita quem prefere menos animação */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

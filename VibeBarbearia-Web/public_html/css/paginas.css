@@ -1,0 +1,219 @@
+/* =====================================================================
+   Vibe Barbearia — paginas.css
+   Estilos específicos de cada página (site público, login, agenda,
+   atendimento, relatórios) e regras de impressão.
+   ===================================================================== */
+
+.h3 { font-size: var(--tam-subtitulo); }
+.sobretitulo { color: var(--dourado-texto); font-weight: 700; letter-spacing: .2em; text-transform: uppercase; font-size: .75rem; margin-bottom: .5rem; }
+.secao-curta { padding: 2.5rem 0 4rem; }
+.cabecalho-pagina { margin-bottom: 1.75rem; max-width: 720px; }
+.centro-flex { justify-content: center; }
+
+/* ---------- Início (hero) ---------- */
+.hero {
+    position: relative; overflow: hidden;
+    padding: 5rem 0 4.5rem;
+    background:
+        radial-gradient(ellipse at 85% 10%, rgba(212, 175, 55, .18), transparent 55%),
+        repeating-linear-gradient(135deg, transparent 0 22px, rgba(212, 175, 55, .035) 22px 44px);
+    border-bottom: 1px solid var(--borda);
+}
+.hero-grade { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: center; }
+.hero h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); letter-spacing: -.01em; }
+.hero-lead { font-size: 1.1rem; color: var(--texto-2); max-width: 540px; margin-bottom: 1.75rem; }
+.hero-card { border-color: var(--dourado); display: grid; gap: .9rem; }
+.status-loja { font-weight: 700; display: inline-flex; align-items: center; gap: .5rem; margin: 0; }
+.status-loja::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--texto-2); }
+.status-loja.aberto { color: var(--verde); } .status-loja.aberto::before { background: var(--verde); box-shadow: 0 0 0 4px rgba(46, 204, 113, .2); }
+.status-loja.fechado { color: var(--laranja); } .status-loja.fechado::before { background: var(--laranja); }
+.hero-dados { display: grid; gap: .6rem; margin: 0; }
+.hero-dados div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dashed var(--borda); padding-bottom: .5rem; }
+.hero-dados dt { color: var(--texto-2); } .hero-dados dd { margin: 0; font-weight: 700; text-align: right; }
+
+.grade-servicos { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.servico-card { display: grid; gap: .35rem; align-content: space-between; transition: border-color var(--transicao), transform var(--transicao); }
+.servico-card:hover { border-color: var(--dourado); transform: translateY(-2px); }
+.servico-card h3 { margin: 0; }
+.preco { font-size: 1.2rem; font-weight: 800; color: var(--dourado-texto); }
+.produtos { margin-top: 1.5rem; }
+.produtos summary { cursor: pointer; font-weight: 700; color: var(--dourado-texto); padding: .5rem 0; }
+.lista-produtos { list-style: none; padding: 0; display: grid; gap: .4rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.lista-produtos li { display: flex; justify-content: space-between; padding: .6rem .9rem; border: 1px solid var(--borda); border-radius: var(--raio-peq); background: var(--cor-card); }
+.grade-equipe { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.barbeiro-card { display: grid; justify-items: center; text-align: center; gap: .35rem; }
+.barbeiro-card h3 { margin: .5rem 0 0; }
+.passos-home { list-style: none; padding: 0; margin: 0; }
+.passos-home .numero { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--dourado); color: #000; font-weight: 800; margin-bottom: .75rem; }
+
+/* ---------- Agendar online ---------- */
+.agendar-grade { display: grid; grid-template-columns: 1fr 320px; gap: 1.5rem; align-items: start; }
+.etapa { border: 0; padding: 0; display: grid; gap: 1rem; }
+.etapa legend { font-size: 1.2rem; font-weight: 700; color: var(--texto); margin-bottom: .25rem; }
+.etapa legend:focus { outline: none; }
+.chip-barbeiro .avatar { width: 40px; height: 40px; }
+.dias { display: grid; grid-auto-flow: column; grid-auto-columns: 92px; gap: .5rem; overflow-x: auto; padding-bottom: .5rem; scroll-snap-type: x mandatory; }
+.dia {
+    scroll-snap-align: start; display: grid; gap: .1rem; justify-items: center;
+    padding: .6rem .4rem; border-radius: var(--raio); cursor: pointer;
+    background: var(--cor-card); border: 1px solid var(--borda); color: var(--texto);
+}
+.dia:hover:not([disabled]) { border-color: var(--dourado); }
+.dia[aria-pressed="true"] { background: var(--dourado); color: #000; border-color: var(--dourado); }
+.dia[disabled] { opacity: .4; cursor: not-allowed; }
+.dia-semana { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; }
+.dia strong { font-size: 1.05rem; }
+.dia-info { font-size: .7rem; }
+.resumo-agendamento { position: sticky; top: 88px; border-color: var(--dourado); }
+.resumo-lista { display: grid; gap: .25rem; margin: 0 0 1rem; }
+.resumo-lista dt { color: var(--texto-2); font-size: .8rem; margin-top: .5rem; }
+.resumo-lista dd { margin: 0; font-weight: 600; }
+.total-resumo { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed var(--borda); padding-top: .75rem; }
+.total-resumo strong { font-size: 1.4rem; color: var(--dourado-texto); }
+.pontos-resumo { font-size: .85rem; color: var(--texto-2); margin: 0; }
+.pontos-resumo span { color: var(--dourado); }
+.confirmacao { text-align: center; max-width: 640px; margin: 0 auto; display: grid; gap: 1rem; justify-items: center; border-color: var(--verde); }
+.selo { width: 72px; height: 72px; border-radius: 50%; display: grid; place-items: center; background: var(--verde); color: #000; font-size: 2.2rem; font-weight: 800; }
+
+/* ---------- Fidelidade ---------- */
+.fidelidade-grade { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; align-items: start; margin-bottom: 1.5rem; }
+.chips-compactos { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+.chips-compactos .chip { padding: .6rem .75rem; }
+.resultado-simulador { border-color: var(--dourado); display: grid; gap: 1.25rem; }
+.meta-pontos { display: grid; gap: .5rem; }
+.dica { font-size: .88rem; color: var(--texto-2); margin: 0; }
+.consulta-form { align-items: flex-end; }
+.consulta-form .campo { flex: 1; min-width: 220px; }
+
+/* ---------- Login e recuperação (tela dividida, como TelaLogin) ---------- */
+.acesso-grade { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+.acesso-marca {
+    position: relative; display: grid; place-items: center; padding: 2rem;
+    background:
+        radial-gradient(circle at 30% 30%, rgba(212, 175, 55, .22), transparent 60%),
+        repeating-linear-gradient(135deg, #0a0a0a 0 26px, #0f0f0f 26px 52px);
+    color: #f5f5f5; border-right: 1px solid var(--dourado);
+}
+.acesso-marca-conteudo { text-align: center; display: grid; justify-items: center; gap: .25rem; }
+.logo-grande { font-size: 4.2rem; font-weight: 800; letter-spacing: .2em; color: var(--dourado); margin: .5rem 0 0; line-height: 1; }
+.logo-sub { letter-spacing: .6em; color: #a0a0a0; margin: 0 0 1.5rem; }
+.acesso-slogan { font-size: 1.35rem; color: #f5f5f5; }
+.voltar-site { position: absolute; left: 1.5rem; bottom: 1.5rem; color: #a0a0a0; }
+.acesso-formulario { display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem 1.25rem; position: relative; }
+.acesso-topo { position: absolute; top: 1rem; right: 1rem; }
+.acesso-caixa { width: min(420px, 100%); display: grid; gap: 1rem; }
+.acesso-caixa h1 { margin: 0; }
+.link-centro { text-align: center; }
+.acesso-rodape { margin-top: 2rem; color: var(--texto-2); font-size: .78rem; }
+.demo { border: 1px dashed var(--dourado); border-radius: var(--raio); padding: 1rem; }
+.demo h2 { font-size: .95rem; margin-bottom: .25rem; }
+.demo-lista { list-style: none; padding: 0; margin: .75rem 0 .25rem; display: grid; gap: .5rem; }
+.demo-item {
+    width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: .55rem .85rem; border-radius: var(--raio-peq); cursor: pointer;
+    border: 1px solid var(--borda); background: var(--cor-card); color: var(--texto); text-align: left;
+}
+.demo-item:hover { border-color: var(--dourado); }
+.demo-item span { font-family: var(--fonte-mono); font-size: .85rem; color: var(--texto-2); }
+.senha-provisoria { font-size: 1.25rem; letter-spacing: .12em; color: var(--dourado-texto); }
+
+/* ---------- Dashboard ---------- */
+.saudacao h2 { margin: 0; font-size: 1.4rem; }
+.saudacao p { margin: 0; }
+.dash-grade { display: grid; grid-template-columns: 1.6fr 1fr; gap: 1.5rem; }
+.lista-proximos { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+.proximo { display: flex; align-items: center; gap: .9rem; padding: .65rem .75rem; border: 1px solid var(--borda); border-radius: var(--raio-peq); }
+.proximo-hora { font-weight: 800; color: var(--dourado-texto); font-variant-numeric: tabular-nums; min-width: 3.2rem; }
+.proximo-info { display: grid; flex: 1; min-width: 0; }
+.proximo-info small { color: var(--texto-2); }
+.kpi-menor { font-size: 1.5rem; }
+
+/* ---------- Agenda ---------- */
+.navegacao-dia { gap: .4rem; }
+.titulo-dia { font-size: 1.1rem; margin: 0; }
+.alternar-visao { display: flex; gap: .35rem; }
+.alternar-visao [aria-pressed="true"] { border-color: var(--dourado); color: var(--dourado-texto); }
+.linha-tempo { overflow-x: auto; }
+.lt-grade { display: grid; grid-template-columns: 64px repeat(var(--colunas), minmax(120px, 1fr)); gap: 3px; min-width: max-content; }
+.lt-cabecalho { display: flex; align-items: center; gap: .5rem; font-weight: 700; padding: .4rem; position: sticky; top: 0; background: var(--cor-card); }
+.lt-cabecalho .avatar { width: 30px; height: 30px; font-size: .75rem; }
+.lt-hora { font-size: .78rem; color: var(--texto-2); padding: .5rem .25rem; font-variant-numeric: tabular-nums; }
+.lt-celula { min-height: 40px; border-radius: 6px; padding: .3rem .5rem; display: grid; align-content: center; font-size: .8rem; line-height: 1.2; }
+.lt-celula small { color: inherit; opacity: .8; }
+.lt-livre { background: var(--cor-campo); border: 1px dashed var(--borda); }
+.lt-bloqueado { background: repeating-linear-gradient(135deg, var(--cor-campo) 0 6px, transparent 6px 12px); border: 1px solid var(--borda); }
+.lt-agendado { background: rgba(230, 126, 34, .18); border-left: 4px solid var(--laranja); }
+.lt-concluido { background: rgba(46, 204, 113, .15); border-left: 4px solid var(--verde); }
+.horarios-compactos { grid-template-columns: repeat(auto-fill, minmax(68px, 1fr)); max-height: 168px; overflow-y: auto; }
+.horarios-compactos .horario { min-height: 36px; font-size: .85rem; }
+
+/* ---------- Clientes / funcionários / catálogo ---------- */
+.lista-historico { list-style: none; padding: 0; margin: 0; display: grid; gap: .5rem; }
+.lista-historico li { display: grid; grid-template-columns: 90px 1fr auto; gap: .25rem 1rem; padding: .6rem 0; border-bottom: 1px solid var(--borda); }
+.lista-historico small { grid-column: 2 / -1; color: var(--texto-2); }
+.grade-equipe-interna, .grade-catalogo { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.func-card { display: grid; gap: .9rem; align-content: start; }
+.func-card.inativo { opacity: .6; }
+.func-card h2 { margin: 0 0 .25rem; }
+.func-dados { display: grid; grid-template-columns: auto 1fr; gap: .25rem .9rem; margin: 0; font-size: .86rem; }
+.func-dados dt { color: var(--texto-2); }
+.func-dados dd { margin: 0; overflow-wrap: anywhere; }
+.item-card { display: grid; gap: .5rem; align-content: start; }
+.item-card h2 { margin: 0; }
+
+/* ---------- Atendimento ---------- */
+.atendimento-grade { display: grid; grid-template-columns: 1.4fr 1fr; gap: 1.5rem; align-items: start; }
+.atendimento-grade .recibo { position: sticky; top: 88px; border-color: var(--dourado); }
+.cliente-info:not(:empty) { display: flex; flex-wrap: wrap; gap: .5rem .9rem; align-items: center; padding: .85rem; border: 1px solid var(--borda); border-radius: var(--raio-peq); background: var(--cor-campo); }
+.cliente-info small { display: block; color: var(--texto-2); }
+.cliente-barbeiro { margin-left: auto; font-size: .85rem; color: var(--texto-2); }
+.lista-itens { display: grid; gap: .35rem; max-height: 320px; overflow-y: auto; padding-right: .25rem; }
+.lista-itens .rotulo { margin: .5rem 0 .1rem; }
+.item-linha { display: grid; grid-template-columns: auto 1fr auto; gap: .75rem; align-items: center; padding: .55rem .75rem; border: 1px solid var(--borda); border-radius: var(--raio-peq); cursor: pointer; }
+.item-linha:has(input:checked) { border-color: var(--dourado); background: rgba(212, 175, 55, .1); }
+.item-linha input { width: 18px; height: 18px; accent-color: var(--dourado); }
+.chips-pagamento { grid-template-columns: repeat(3, 1fr); }
+.chips-pagamento .chip { text-align: center; }
+.card-interno { padding: .85rem 1rem; border: 1px dashed var(--dourado); border-radius: var(--raio-peq); }
+.recibo-itens { list-style: none; padding: 0; margin: 0 0 1rem; display: grid; gap: .35rem; }
+.recibo-itens li { display: flex; justify-content: space-between; gap: 1rem; }
+
+/* ---------- Relatórios e senha ---------- */
+.painel-relatorio { display: grid; gap: 1.25rem; }
+.titulo-relatorio { font-size: 1.1rem; margin: 0; }
+.acoes-relatorio { margin-left: auto; }
+.cartao-estreito { max-width: 520px; }
+.forca { display: grid; gap: .3rem; }
+
+/* ---------- Responsivo ---------- */
+@media (max-width: 1100px) {
+    .dash-grade, .atendimento-grade { grid-template-columns: 1fr; }
+    .atendimento-grade .recibo { position: static; }
+}
+@media (max-width: 900px) {
+    .hero-grade, .agendar-grade, .fidelidade-grade { grid-template-columns: 1fr; }
+    .resumo-agendamento { position: static; }
+    .acesso-grade { grid-template-columns: 1fr; }
+    .acesso-marca { min-height: 220px; border-right: 0; border-bottom: 1px solid var(--dourado); }
+    .logo-grande { font-size: 2.6rem; }
+    .acesso-slogan { display: none; }
+    .voltar-site { position: static; margin-top: 1rem; }
+}
+@media (max-width: 600px) {
+    .hero { padding: 3rem 0; }
+    .chips-pagamento { grid-template-columns: 1fr 1fr 1fr; }
+    .lista-historico li { grid-template-columns: 1fr auto; }
+    .lista-historico li span:first-child { grid-column: 1 / -1; color: var(--texto-2); }
+}
+
+/* ---------- Impressão (recibo e relatórios) ---------- */
+@media print {
+    :root { --cor-fundo: #fff; --cor-card: #fff; --texto: #000; --texto-2: #444; --borda: #bbb; --dourado-texto: #000; }
+    .sidebar, .topbar, .rodape-app, .barra-ferramentas, .abas, .toasts, .btn, form.barra-ferramentas, .site-cabecalho, .site-rodape { display: none !important; }
+    .app { display: block; }
+    .card, .kpi { box-shadow: none; break-inside: avoid; }
+    .tabela th { background: #eee !important; color: #000 !important; }
+    body:has(dialog[open]) .app { display: none; }
+    dialog.modal[open] { position: static; border: 0; box-shadow: none; width: 100%; max-height: none; }
+    dialog.modal::backdrop { display: none; }
+}
