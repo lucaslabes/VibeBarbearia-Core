@@ -1,0 +1,19 @@
+# Saídas de build do NetBeans/Ant (não versionar)
+build/
+dist/
+nbproject/private/
+
+# Compilados
+*.class
+*.jar
+!lib/*.jar
+
+# Configuração local com senha do banco
+config/banco.properties
+
+# Sistema / IDE
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*~

@@ -1,0 +1,5 @@
+# Copie para config/banco.properties (NÃO versionado) e ajuste.
+# Alternativa: variáveis de ambiente VIBE_DB_URL, VIBE_DB_USUARIO, VIBE_DB_SENHA.
+db.url=jdbc:mysql://localhost:3306/vibebarbearia?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=America/Sao_Paulo&characterEncoding=utf8
+db.usuario=root
+db.senha=coloque_sua_senha_aqui
