@@ -1,0 +1,7 @@
+# Saídas de build do NetBeans/Ant
+build/
+dist/
+nbproject/private/
+
+# O .gitignore da raiz ignora *.jar; aqui as bibliotecas de teste DEVEM ser versionadas
+!lib/*.jar
